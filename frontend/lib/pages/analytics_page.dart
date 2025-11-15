@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../models/workout_stats.dart';
 import '../services/workout_service.dart';
 import '../theme/app_theme.dart';
-import 'package:intl/intl.dart';
 
 /// Analytics Page
 /// Shows real workout statistics with charts
@@ -85,18 +84,6 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Period info
-                  Text(
-                    '${DateFormat('MMM d').format(stats.period.startDate)} - ${DateFormat('MMM d, y').format(stats.period.endDate)}',
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  
-                  const SizedBox(height: 20),
-                  
                   // Overview cards
                   _buildOverviewCards(stats.overview),
                   
