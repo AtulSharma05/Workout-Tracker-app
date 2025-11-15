@@ -16,10 +16,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 1; // Start at Dashboard
 
-  final List<Widget> _pages = [
+  void switchToTab(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  List<Widget> get _pages => [
     const AnalyticsPage(),
-    const DashboardPage(),
-    const FeaturesPage(),
+    DashboardPage(onSwitchTab: switchToTab),
+    FeaturesPage(onSwitchTab: switchToTab),
     const ProfilePage(),
   ];
 

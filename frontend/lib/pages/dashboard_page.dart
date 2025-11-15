@@ -3,11 +3,14 @@ import 'package:provider/provider.dart';
 import '../services/workout_service.dart';
 import '../theme/app_theme.dart';
 import '../models/workout.dart';
+import 'rewards_page.dart';
 
 /// Dashboard/Home Screen
 /// Main landing page with workout stats and quick actions
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+  final Function(int)? onSwitchTab;
+  
+  const DashboardPage({super.key, this.onSwitchTab});
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -57,29 +60,45 @@ class _DashboardPageState extends State<DashboardPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _QuickActionCard(
-                      icon: Icons.fitness_center,
-                      label: 'Start Workout',
-                      color: AppTheme.primaryGreen.withOpacity(0.2),
-                      onTap: () {
-                        Navigator.pushNamed(context, '/log-workout');
-                      },
+                    Expanded(
+                      child: _QuickActionCard(
+                        icon: Icons.fitness_center,
+                        label: 'Start Workout',
+                        color: AppTheme.primaryGreen.withOpacity(0.2),
+                        onTap: () {
+                          Navigator.pushNamed(context, '/log-workout');
+                        },
+                      ),
                     ),
-                    _QuickActionCard(
-                      icon: Icons.emoji_events,
-                      label: 'Rewards',
-                      color: Colors.orange.withOpacity(0.2),
-                      onTap: () {
-                        // TODO: Navigate to rewards
-                      },
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: _QuickActionCard(
+                        icon: Icons.emoji_events,
+                        label: 'Rewards',
+                        color: Colors.orange.withOpacity(0.2),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const RewardsPage(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                    _QuickActionCard(
-                      icon: Icons.bar_chart,
-                      label: 'Progress',
-                      color: AppTheme.primaryGreen.withOpacity(0.3),
-                      onTap: () {
-                        // Switch to analytics tab
-                      },
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: _QuickActionCard(
+                        icon: Icons.bar_chart,
+                        label: 'Progress',
+                        color: AppTheme.primaryGreen.withOpacity(0.3),
+                        onTap: () {
+                          // Switch to analytics tab (index 0)
+                          if (widget.onSwitchTab != null) {
+                            widget.onSwitchTab!(0);
+                          }
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -104,39 +123,72 @@ class _DashboardPageState extends State<DashboardPage> {
                       _WorkoutTypeCard(
                         title: 'Strength Training',
                         subtitle: 'Build muscle and strength',
+                        icon: Icons.fitness_center,
                         gradient: const LinearGradient(
                           colors: [Color(0xFFA8C5A5), Color(0xFFE5C7C7)],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
                         onTap: () {
-                          Navigator.pushNamed(context, '/log-workout');
+                          Navigator.pushNamed(
+                            context,
+                            '/log-workout',
+                            arguments: {'workoutType': 'strength'},
+                          );
                         },
                       ),
                       const SizedBox(width: 16),
                       _WorkoutTypeCard(
-                        title: 'Cardio Workout',
-                        subtitle: 'Improve cardiovascular health',
-                        gradient: LinearGradient(
-                          colors: [AppTheme.primaryGreen, AppTheme.primaryGreen.withOpacity(0.7)],
+                        title: 'Cardio',
+                        subtitle: 'Boost heart health and endurance',
+                        icon: Icons.directions_run,
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFFFDD835), Color(0xFFFBC02D)],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
                         onTap: () {
-                          Navigator.pushNamed(context, '/log-workout');
+                          Navigator.pushNamed(
+                            context,
+                            '/log-workout',
+                            arguments: {'workoutType': 'cardio'},
+                          );
                         },
                       ),
                       const SizedBox(width: 16),
                       _WorkoutTypeCard(
                         title: 'Flexibility',
                         subtitle: 'Enhance mobility and balance',
+                        icon: Icons.self_improvement,
                         gradient: const LinearGradient(
                           colors: [Color(0xFFB8A5C5), Color(0xFFE5C7C7)],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
                         onTap: () {
-                          Navigator.pushNamed(context, '/log-workout');
+                          Navigator.pushNamed(
+                            context,
+                            '/log-workout',
+                            arguments: {'workoutType': 'flexibility'},
+                          );
+                        },
+                      ),
+                      const SizedBox(width: 16),
+                      _WorkoutTypeCard(
+                        title: 'Sports',
+                        subtitle: 'Play and compete for fitness',
+                        icon: Icons.sports_basketball,
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFF42A5F5), Color(0xFF1E88E5)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/log-workout',
+                            arguments: {'workoutType': 'sports'},
+                          );
                         },
                       ),
                     ],
@@ -245,8 +297,7 @@ class _QuickActionCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 100,
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 8),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(16),
@@ -256,10 +307,11 @@ class _QuickActionCard extends StatelessWidget {
           ),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               icon,
-              size: 32,
+              size: 36,
               color: AppTheme.darkBrown,
             ),
             const SizedBox(height: 8),
@@ -267,7 +319,7 @@ class _QuickActionCard extends StatelessWidget {
               label,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 12,
+                fontSize: 13,
                 fontWeight: FontWeight.w600,
                 color: AppTheme.darkBrown,
               ),
@@ -283,12 +335,14 @@ class _QuickActionCard extends StatelessWidget {
 class _WorkoutTypeCard extends StatelessWidget {
   final String title;
   final String subtitle;
+  final IconData icon;
   final Gradient gradient;
   final VoidCallback onTap;
 
   const _WorkoutTypeCard({
     required this.title,
     required this.subtitle,
+    required this.icon,
     required this.gradient,
     required this.onTap,
   });
@@ -316,15 +370,15 @@ class _WorkoutTypeCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              Icons.fitness_center,
-              size: 40,
-              color: Colors.white.withOpacity(0.9),
+              icon,
+              size: 48,
+              color: Colors.white,
             ),
             const SizedBox(height: 16),
             Text(
               title,
               style: const TextStyle(
-                fontSize: 20,
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),

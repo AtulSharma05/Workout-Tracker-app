@@ -5,7 +5,9 @@ import '../services/workout_service.dart';
 
 /// Log Workout Page - Form to add new workouts
 class LogWorkoutPage extends StatefulWidget {
-  const LogWorkoutPage({super.key});
+  final String? initialWorkoutType;
+  
+  const LogWorkoutPage({super.key, this.initialWorkoutType});
 
   @override
   State<LogWorkoutPage> createState() => _LogWorkoutPageState();
@@ -25,6 +27,15 @@ class _LogWorkoutPageState extends State<LogWorkoutPage> {
   String _workoutType = 'strength';
   String _intensityLevel = 'moderate';
   bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Set initial workout type if provided
+    if (widget.initialWorkoutType != null) {
+      _workoutType = widget.initialWorkoutType!;
+    }
+  }
 
   @override
   void dispose() {

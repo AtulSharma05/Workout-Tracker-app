@@ -54,7 +54,10 @@ class MyApp extends StatelessWidget {
                       case '/home':
                         return const HomePage();
                       case '/log-workout':
-                        return const LogWorkoutPage();
+                        final args = settings.arguments as Map<String, dynamic>?;
+                        return LogWorkoutPage(
+                          initialWorkoutType: args?['workoutType'],
+                        );
                       case '/workout-history':
                         return const WorkoutHistoryPage();
                       default:
