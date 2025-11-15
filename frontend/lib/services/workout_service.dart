@@ -1,5 +1,6 @@
 import '../config/api_config.dart';
 import '../models/workout.dart';
+import '../models/workout_stats.dart';
 import 'api_service.dart';
 
 /// Workout Service
@@ -101,6 +102,28 @@ class WorkoutService {
       await _apiService.delete('${ApiConfig.workoutEndpoint}/$id');
     } catch (e) {
       throw Exception('Failed to delete workout: $e');
+    }
+  }
+  
+  /// Get workout statistics
+  Future<WorkoutStats> getStats({DateTime? startDate, DateTime? endDate}) async {
+    try {
+      final queryParams = <String, dynamic>{};
+      if (startDate != null) {
+        queryParams['startDate'] = startDate.toIso8601String();
+      }
+      if (endDate != null) {
+        queryParams['endDate'] = endDate.toIso8601String();
+      }
+      
+      final response = await _apiService.get(
+        ApiConfig.workoutStatsEndpoint,
+        queryParameters: queryParams,
+      );
+      
+      return WorkoutStats.fromJson(response.data);
+    } catch (e) {
+      throw Exception('Failed to fetch workout stats: $e');
     }
   }
 }

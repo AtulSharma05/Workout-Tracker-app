@@ -57,6 +57,9 @@ dependencies:
   # Loading Indicators
   flutter_spinkit: ^5.2.0
   
+  # Charts
+  fl_chart: ^0.68.0
+  
   # Toast/Snackbar messages
   fluttertoast: ^8.2.4
   intl: ^0.20.2

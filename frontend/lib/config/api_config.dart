@@ -39,6 +39,7 @@ class ApiConfig {
   /// API endpoints
   static const String authEndpoint = '/auth';
   static const String workoutEndpoint = '/workouts';
+  static const String workoutStatsEndpoint = '/workouts/stats';
   
   /// Timeout durations
   static const Duration connectionTimeout = Duration(seconds: 30);
