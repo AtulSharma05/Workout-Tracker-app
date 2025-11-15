@@ -1,6 +1,39 @@
-# Workout Tracker App
+# 🏋️ Workout Tracker App
 
-Full-stack workout tracking application with Flutter frontend and Node.js/Express/MongoDB backend.
+A full-stack workout tracking application with Flutter frontend and Node.js/Express/MongoDB backend. Track your fitness journey with real-time analytics, achievements, and rewards system.
+
+## ✨ Features
+
+### 🎯 Core Features
+- **Workout Logging** - Track exercises with sets, reps, weight, duration, and calories
+- **Workout Types** - Strength Training, Cardio, Flexibility, Sports
+- **Real-time Analytics** - Visual charts and statistics of your progress
+- **Streak Tracking** - Monitor consecutive workout days
+- **Recent Workouts** - Quick view of your latest activities
+
+### 🏆 Gamification
+- **Points System** - Earn points from completing achievements
+- **Achievements** - 7 unlockable achievements (First Steps, Consistency, Weekly Warrior, etc.)
+- **Rewards** - Unlock features with points (Custom Themes, Advanced Stats, etc.)
+- **Tokens** - Blockchain-based rewards for future live challenges (Coming Soon)
+
+### 📊 Analytics
+- **Overview Cards** - Total workouts, streak, time, calories
+- **Weekly Progress** - Bar chart showing workout frequency
+- **Workout Distribution** - Pie chart of workout types
+- **Top Exercises** - Most performed exercises ranked
+
+### 👤 Profile
+- **User Information** - Display name, email, avatar with initials
+- **Stats Dashboard** - Total workouts, minutes, calories, averages
+- **Workout Breakdown** - Distribution by type
+- **Achievement Badges** - Visual progress indicators
+- **Streak Milestones** - Progress to next milestone (7/14/30/60/100/365 days)
+
+### 🔐 Authentication
+- **JWT-based** - Secure token authentication
+- **User Registration** - Create account with email, username, full name
+- **Login/Logout** - Persistent sessions with secure token storage
 
 ## 🎯 Project Structure
 
@@ -50,11 +83,16 @@ new/
 
 3. **Configure environment variables:**
    - Copy `.env.example` to `.env`
-   - Update MongoDB connection string and other settings
+   - Update MongoDB connection string if needed (default: `mongodb://localhost:27017/workout_tracker_db`)
+   - Update JWT secret for production
 
-4. **Start MongoDB:**
+4. **Start MongoDB** (if not running):
    ```bash
-   npm run mongo
+   # Windows (if MongoDB installed as service)
+   net start MongoDB
+   
+   # Mac/Linux
+   mongod
    ```
 
 5. **Start backend server:**
@@ -184,81 +222,57 @@ Visit in browser: `http://localhost:3000/health`
 
 ### "CORS error"
 
-- Already fixed in backend `server.js`
-- If still occurring, check backend console logs
-
-### App uses Hive instead of backend
-
-- Check Flutter logs for connectivity errors
-- Connectivity checker should show error messages
-- Verify API base URL is correct
-
-## 📚 API Endpoints
-
-### Authentication
-- `POST /api/v1/auth_user/register` - Register new user
-- `POST /api/v1/auth_user/login` - Login user
-
-### Workouts
-- `GET /api/v1/workout_logging` - Get all workouts
-- `GET /api/v1/workout_logging/:id` - Get specific workout
-- `POST /api/v1/workout_logging` - Create workout
-- `PUT /api/v1/workout_logging/:id` - Update workout
-- `DELETE /api/v1/workout_logging/:id` - Delete workout
-
-## 🎨 Architecture
-
-### Backend: MVC Pattern
-- **Models**: MongoDB schemas with Mongoose
-- **Views**: JSON responses
-- **Controllers**: Business logic
-- **Routes**: API endpoint definitions
-
-### Frontend: Clean Architecture
-- **Models**: Data models with JSON serialization
-- **Services**: API communication layer
-- **Controllers**: State management (Provider)
-- **Views**: UI screens
-- **Widgets**: Reusable components
-
-### Data Flow
-```
-User Action → Controller → Service → API → Backend
-            ←            ←         ←       ←
-         Update UI    Response   JSON   Database
-```
+- Backend CORS is configured to accept all origins in development
+- If issues persist, check backend console logs
 
 ## 🔐 Security Features
 
-- JWT authentication
-- Secure token storage (flutter_secure_storage)
-- Request rate limiting
-- Helmet.js security headers
-- Input validation
+- **JWT Authentication** - Secure token-based auth with 7-day expiration
+- **Secure Storage** - Tokens stored in flutter_secure_storage
+- **Password Hashing** - bcrypt with 12 rounds
+- **Input Validation** - Server-side validation for all requests
+- **User ID Extraction** - Automatic userId from JWT (not sent in requests)
 
 ## 📦 Key Dependencies
 
 ### Backend
 - express, mongoose, cors
 - bcryptjs, jsonwebtoken
-- helmet, morgan, express-rate-limit
+- helmet, morgan
 
 ### Frontend
 - dio (HTTP client)
 - provider (state management)
-- hive (local caching)
+- fl_chart (data visualization)
 - connectivity_plus (network checking)
 - flutter_secure_storage (token storage)
 
-## 🚧 Next Steps
+## 🚀 Future Enhancements
 
-1. Implement complete authentication flow
-2. Build workout CRUD UI screens
-3. Add offline-first architecture with Hive caching
-4. Implement workout history and analytics
-5. Add exercise library
-6. Implement progress tracking
+- [ ] Social features & community
+- [ ] Workout plans & templates
+- [ ] AI workout recommendations
+- [ ] Progress photos & body measurements
+- [ ] Dark mode
+- [ ] Export workout data (CSV/PDF)
+- [ ] Rest timer for sets
+- [ ] Push notifications
+- [ ] Exercise library with instructions
+- [ ] Advanced analytics & personal records
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 👨‍💻 Author
+
+**Atul Sharma**
+- GitHub: [@AtulSharma05](https://github.com/AtulSharma05)
 
 ---
 
-**Important:** This project ensures the Flutter app ALWAYS connects to the backend. Hive is configured as an offline cache only, not as a silent fallback when connectivity issues occur.
+**Note:** This app requires an active backend connection. The app is designed to work exclusively with the backend API for data persistence and authentication.
