@@ -161,20 +161,43 @@ workoutSchema.statics.getWorkoutStreak = async function(userId) {
   
   if (workouts.length === 0) return 0;
   
-  let streak = 0;
-  let currentDate = new Date();
-  currentDate.setHours(0, 0, 0, 0);
+  // Get unique workout dates (in case multiple workouts on same day)
+  const uniqueDates = [...new Set(workouts.map(w => {
+    const d = new Date(w.date);
+    d.setHours(0, 0, 0, 0);
+    return d.getTime();
+  }))].sort((a, b) => b - a); // Sort descending
   
-  for (const workout of workouts) {
-    const workoutDate = new Date(workout.date);
-    workoutDate.setHours(0, 0, 0, 0);
+  if (uniqueDates.length === 0) return 0;
+  
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayTime = today.getTime();
+  
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yesterdayTime = yesterday.getTime();
+  
+  // Check if the most recent workout is today or yesterday
+  const mostRecentWorkout = uniqueDates[0];
+  if (mostRecentWorkout !== todayTime && mostRecentWorkout !== yesterdayTime) {
+    return 0; // Streak broken - no workout today or yesterday
+  }
+  
+  // Count consecutive days
+  let streak = 1;
+  for (let i = 1; i < uniqueDates.length; i++) {
+    const currentDay = uniqueDates[i - 1];
+    const previousDay = uniqueDates[i];
     
-    const daysDiff = Math.floor((currentDate - workoutDate) / (1000 * 60 * 60 * 24));
+    // Calculate difference in days
+    const daysDiff = Math.round((currentDay - previousDay) / (1000 * 60 * 60 * 24));
     
-    if (daysDiff === streak) {
+    if (daysDiff === 1) {
+      // Consecutive day
       streak++;
-      currentDate.setDate(currentDate.getDate() - 1);
-    } else if (daysDiff > streak) {
+    } else {
+      // Gap found, stop counting
       break;
     }
   }

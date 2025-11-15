@@ -40,6 +40,9 @@ class AuthService {
       if (token != null) {
         await _saveToken(token);
         _apiService.setAuthToken(token);
+        if (userData != null) {
+          await _saveUser(userData);
+        }
       }
       
       return {
@@ -111,6 +114,9 @@ class AuthService {
       if (token != null) {
         await _saveToken(token);
         _apiService.setAuthToken(token);
+        if (userData != null) {
+          await _saveUser(userData);
+        }
       }
       
       return {
@@ -129,6 +135,10 @@ class AuthService {
   /// Logout user
   Future<void> logout() async {
     await _secureStorage.delete(key: 'auth_token');
+    await _secureStorage.delete(key: 'user_id');
+    await _secureStorage.delete(key: 'user_email');
+    await _secureStorage.delete(key: 'user_username');
+    await _secureStorage.delete(key: 'user_fullName');
     _apiService.clearAuthToken();
   }
   
@@ -140,6 +150,38 @@ class AuthService {
   /// Save token securely
   Future<void> _saveToken(String token) async {
     await _secureStorage.write(key: 'auth_token', value: token);
+  }
+  
+  /// Save user data
+  Future<void> _saveUser(Map<String, dynamic> userData) async {
+    await _secureStorage.write(key: 'user_id', value: userData['_id'] ?? userData['id']);
+    await _secureStorage.write(key: 'user_email', value: userData['email']);
+    if (userData['username'] != null) {
+      await _secureStorage.write(key: 'user_username', value: userData['username']);
+    }
+    if (userData['fullName'] != null) {
+      await _secureStorage.write(key: 'user_fullName', value: userData['fullName']);
+    }
+  }
+  
+  /// Get current user data
+  Future<User?> getCurrentUser() async {
+    final id = await _secureStorage.read(key: 'user_id');
+    if (id == null) return null;
+    
+    final email = await _secureStorage.read(key: 'user_email');
+    final username = await _secureStorage.read(key: 'user_username');
+    final fullName = await _secureStorage.read(key: 'user_fullName');
+    
+    if (email == null) return null;
+    
+    return User(
+      id: id,
+      email: email,
+      username: username,
+      fullName: fullName,
+      createdAt: DateTime.now(),
+    );
   }
   
   /// Check if user is logged in
