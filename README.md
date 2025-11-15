@@ -268,11 +268,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 👨‍💻 Author
-
-**Atul Sharma**
-- GitHub: [@AtulSharma05](https://github.com/AtulSharma05)
-
----
 
 **Note:** This app requires an active backend connection. The app is designed to work exclusively with the backend API for data persistence and authentication.
