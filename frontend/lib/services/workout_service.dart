@@ -14,7 +14,8 @@ class WorkoutService {
     try {
       final response = await _apiService.get(ApiConfig.workoutEndpoint);
       
-      final List<dynamic> workoutsJson = response.data['workouts'] ?? response.data;
+      // Backend returns: {success: true, data: {workouts: [...]}}
+      final List<dynamic> workoutsJson = response.data['data']?['workouts'] ?? response.data['workouts'] ?? response.data;
       return workoutsJson.map((json) => Workout.fromJson(json)).toList();
     } catch (e) {
       throw Exception('Failed to fetch workouts: $e');
@@ -25,7 +26,8 @@ class WorkoutService {
   Future<Workout> getWorkout(String id) async {
     try {
       final response = await _apiService.get('${ApiConfig.workoutEndpoint}/$id');
-      return Workout.fromJson(response.data['workout'] ?? response.data);
+      final workoutData = response.data['data']?['workout'] ?? response.data['workout'] ?? response.data;
+      return Workout.fromJson(workoutData);
     } catch (e) {
       throw Exception('Failed to fetch workout: $e');
     }
@@ -39,10 +41,43 @@ class WorkoutService {
         data: workout.toJson(),
       );
       
-      return Workout.fromJson(response.data['workout'] ?? response.data);
+      // Backend returns: {success: true, data: {workout: {...}}}
+      final workoutData = response.data['data']?['workout'] ?? response.data['workout'] ?? response.data;
+      return Workout.fromJson(workoutData);
     } catch (e) {
       throw Exception('Failed to create workout: $e');
     }
+  }
+  
+  /// Create a new workout from parameters
+  Future<Workout> createWorkoutFromParams({
+    required String exerciseName,
+    required String workoutType,
+    required int duration,
+    required double caloriesBurned,
+    DateTime? date,
+    int? sets,
+    int? reps,
+    double? weight,
+    String? notes,
+    String intensityLevel = 'moderate',
+  }) async {
+    final workout = Workout(
+      userId: 'current_user', // Will be set by backend from token
+      exerciseName: exerciseName,
+      workoutType: workoutType,
+      duration: duration,
+      caloriesBurned: caloriesBurned,
+      date: date ?? DateTime.now(),
+      sets: sets,
+      reps: reps,
+      weight: weight,
+      notes: notes,
+      intensityLevel: intensityLevel,
+      createdAt: DateTime.now(),
+    );
+    
+    return createWorkout(workout);
   }
   
   /// Update an existing workout
@@ -53,7 +88,8 @@ class WorkoutService {
         data: workout.toJson(),
       );
       
-      return Workout.fromJson(response.data['workout'] ?? response.data);
+      final workoutData = response.data['data']?['workout'] ?? response.data['workout'] ?? response.data;
+      return Workout.fromJson(workoutData);
     } catch (e) {
       throw Exception('Failed to update workout: $e');
     }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import 'analytics_page.dart';
+import 'dashboard_page.dart';
 import 'features_page.dart';
 import 'profile_page.dart';
 
@@ -13,11 +14,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 1;
+  int _currentIndex = 1; // Start at Dashboard
 
   final List<Widget> _pages = [
     const AnalyticsPage(),
-    const FeaturesPage(),
+    const DashboardPage(),
     const FeaturesPage(),
     const ProfilePage(),
   ];
