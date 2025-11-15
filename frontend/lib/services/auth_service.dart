@@ -11,7 +11,51 @@ class AuthService {
   
   AuthService(this._apiService);
   
-  /// Register new user
+  /// Expose apiService for custom calls
+  ApiService get apiService => _apiService;
+  
+  /// Register new user with full profile
+  Future<Map<String, dynamic>> registerFull({
+    required String username,
+    required String email,
+    required String password,
+    required String fullName,
+  }) async {
+    try {
+      final response = await _apiService.post(
+        '${ApiConfig.authEndpoint}/register',
+        data: {
+          'username': username,
+          'email': email,
+          'password': password,
+          'fullName': fullName,
+        },
+      );
+      
+      // Backend returns: { status, message, data: { user, tokens: { accessToken, refreshToken } } }
+      final data = response.data['data'];
+      final token = data['tokens']['accessToken'];
+      final userData = data['user'];
+      
+      if (token != null) {
+        await _saveToken(token);
+        _apiService.setAuthToken(token);
+      }
+      
+      return {
+        'success': true,
+        'user': userData != null ? User.fromJson(userData) : null,
+        'token': token,
+      };
+    } catch (e) {
+      return {
+        'success': false,
+        'error': e.toString(),
+      };
+    }
+  }
+  
+  /// Register new user (basic)
   Future<Map<String, dynamic>> register({
     required String email,
     required String password,
@@ -59,15 +103,20 @@ class AuthService {
         },
       );
       
-      if (response.data['token'] != null) {
-        await _saveToken(response.data['token']);
-        _apiService.setAuthToken(response.data['token']);
+      // Backend returns: { status, message, data: { user, tokens: { accessToken, refreshToken } } }
+      final data = response.data['data'];
+      final token = data['tokens']['accessToken'];
+      final userData = data['user'];
+      
+      if (token != null) {
+        await _saveToken(token);
+        _apiService.setAuthToken(token);
       }
       
       return {
         'success': true,
-        'user': User.fromJson(response.data['user']),
-        'token': response.data['token'],
+        'user': userData != null ? User.fromJson(userData) : null,
+        'token': token,
       };
     } catch (e) {
       return {

@@ -1,0 +1,234 @@
+{
+	"info": {
+		"name": "Workout Tracker API",
+		"description": "Complete API collection for Workout Tracker Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/health",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "3000",
+					"path": ["health"]
+				}
+			}
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set('token', jsonData.token);",
+									"    pm.collectionVariables.set('token', jsonData.token);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"testuser123\",\n  \"email\": \"testuser123@example.com\",\n  \"password\": \"Test@1234\",\n  \"fullName\": \"Test User\",\n  \"age\": 25,\n  \"height\": 175,\n  \"weight\": 70,\n  \"activityLevel\": \"moderate\",\n  \"fitnessGoal\": \"improve_fitness\"\n}"
+						},
+					"url": {
+						"raw": "{{base_url}}/auth/register",
+						"host": ["{{base_url}}"],
+						"path": ["auth", "register"]
+						}
+					}
+				},
+				{
+					"name": "Login User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set('token', jsonData.token);",
+									"    pm.collectionVariables.set('token', jsonData.token);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"testuser123@example.com\",\n  \"password\": \"Test@1234\"\n}"
+						},
+					"url": {
+						"raw": "{{base_url}}/auth/login",
+						"host": ["{{base_url}}"],
+						"path": ["auth", "login"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Workouts",
+			"item": [
+				{
+					"name": "Get All Workouts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+					"url": {
+						"raw": "{{base_url}}/workouts",
+						"host": ["{{base_url}}"],
+						"path": ["workouts"]
+						}
+					}
+				},
+				{
+					"name": "Create Workout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"exerciseName\": \"Push Ups\",\n  \"workoutType\": \"strength\",\n  \"duration\": 30,\n  \"caloriesBurned\": 150,\n  \"sets\": 3,\n  \"reps\": 15,\n  \"weight\": 0,\n  \"intensityLevel\": \"moderate\",\n  \"notes\": \"Great workout session!\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/workout_logging",
+							"host": ["{{base_url}}"],
+							"path": ["workout_logging"]
+						}
+					}
+				},
+				{
+					"name": "Get Workout by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+					"url": {
+						"raw": "{{base_url}}/workouts/:id",
+						"host": ["{{base_url}}"],
+						"path": ["workouts", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "PASTE_WORKOUT_ID_HERE"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Workout",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"exerciseName\": \"Push Ups - Updated\",\n  \"duration\": 45,\n  \"caloriesBurned\": 200,\n  \"notes\": \"Increased duration and intensity\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/workout_logging/:id",
+							"host": ["{{base_url}}"],
+							"path": ["workout_logging", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "PASTE_WORKOUT_ID_HERE"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Workout",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/workout_logging/:id",
+							"host": ["{{base_url}}"],
+							"path": ["workout_logging", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "PASTE_WORKOUT_ID_HERE"
+								}
+							]
+						}
+					}
+				}
+			]
+		}
+	]
+}

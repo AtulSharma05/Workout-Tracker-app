@@ -37,8 +37,8 @@ class ApiConfig {
   static String get localhostUrl => 'http://localhost:$_port/api/$_apiVersion';
   
   /// API endpoints
-  static const String authEndpoint = '/auth_user';
-  static const String workoutEndpoint = '/workout_logging';
+  static const String authEndpoint = '/auth';
+  static const String workoutEndpoint = '/workouts';
   
   /// Timeout durations
   static const Duration connectionTimeout = Duration(seconds: 30);
