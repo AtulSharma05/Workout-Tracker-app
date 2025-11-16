@@ -6,6 +6,7 @@ import '../services/auth_service.dart';
 import '../services/workout_service.dart';
 import '../theme/app_theme.dart';
 import 'package:intl/intl.dart';
+import 'home_page.dart';
 
 /// Profile Page
 /// User profile with real workout stats and streak
@@ -25,6 +26,15 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: AppTheme.cream,
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppTheme.darkBrown),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const HomePage()),
+            );
+          },
+        ),
         title: const Text(
           'Profile',
           style: TextStyle(color: AppTheme.darkBrown),

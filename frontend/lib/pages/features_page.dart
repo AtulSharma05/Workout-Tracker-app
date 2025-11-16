@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import 'rewards_page.dart';
+import 'home_page.dart';
 
 /// Features Page
 /// Grid of feature cards for main app functionality
@@ -14,6 +15,15 @@ class FeaturesPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppTheme.cream,
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppTheme.darkBrown),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const HomePage()),
+            );
+          },
+        ),
         title: const Text(
           'Features',
           style: TextStyle(

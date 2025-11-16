@@ -113,28 +113,19 @@ def schedule_exercises(preds, days):
     stretch_exercises = [ex for ex in exercises if any(s in ex.lower() for s in stretch)]
     other_exercises = [ex for ex in exercises if ex not in push_exercises + pull_exercises + leg_exercises + stretch_exercises]
     
-    # Distribute exercises across training days
-    all_exercise_groups = [push_exercises, pull_exercises, leg_exercises, other_exercises]
-    non_empty_groups = [group for group in all_exercise_groups if group]
-    
     # Distribute exercises evenly across all training days using round-robin
     all_workout_exercises = [ex for ex in exercises if ex not in stretch_exercises]
     
-    if len(all_workout_exercises) > 0:
-        # Round-robin distribution to ensure all training days get exercises
-        day_idx = 0
-        
-        # First pass: distribute all exercises round-robin
-        for ex in all_workout_exercises:
-            schedule[training_days[day_idx]].append((ex, preds[ex]))
-            day_idx = (day_idx + 1) % len(training_days)
-        
-        # Second pass: if any training day is still empty, add stretches
-        for day in training_days:
-            if len(schedule[day]) == 0 and stretch_exercises:
-                for ex in stretch_exercises:
-                    schedule[day].append((ex, preds[ex]))
-                    break
+    # Round-robin distribution to ensure all days get exercises
+    day_idx = 0
+    for ex in all_workout_exercises:
+        schedule[training_days[day_idx]].append((ex, preds[ex]))
+        day_idx = (day_idx + 1) % len(training_days)
+    
+    # Add stretches to each training day
+    for day in training_days:
+        for ex in stretch_exercises:
+            schedule[day].append((ex, preds[ex]))
     
     return schedule
 
@@ -194,9 +185,21 @@ def substitute_exercises(preds, available_equipment, injuries=None, exercises_pa
         if eq == 'gym':
             allowed_all = True
             allowed = set()
+        elif eq == 'home':
+            # Home workouts can include body weight, dumbbells, and resistance bands
+            allowed_all = False
+            allowed = {'dumbbell', 'body weight', 'band', 'resistance band', 'kettlebell', 'exercise ball'}
+        elif eq == 'body weight':
+            # Pure body weight workouts only
+            allowed_all = False
+            allowed = {'body weight'}
         elif eq == 'dumbbells':
             allowed_all = False
             allowed = {'dumbbell', 'body weight', 'band', 'kettlebell'}
+        elif eq == 'park':
+            # Park/outdoor workouts are typically body weight only
+            allowed_all = False
+            allowed = {'body weight'}
         else:
             allowed_all = False
             allowed = {'body weight'}
@@ -227,39 +230,83 @@ def substitute_exercises(preds, available_equipment, injuries=None, exercises_pa
             else:
                 unavailable = False
         else:
-            # unknown exact exercise, use muscle mapping to decide contraindication
+            # unknown exact exercise - if it contains equipment keywords, check if allowed
             contraindicated = False
             unavailable = False
+            
+            # Check if exercise name contains equipment keywords that aren't allowed
+            ex_lower = ex.lower()
+            if 'dumbbell' in ex_lower and 'dumbbell' not in allowed and not allowed_all:
+                unavailable = True
+            elif 'barbell' in ex_lower and 'barbell' not in allowed and not allowed_all:
+                unavailable = True
+            elif 'cable' in ex_lower and 'cable' not in allowed and not allowed_all:
+                unavailable = True
+            elif 'machine' in ex_lower and 'machine' not in allowed and not allowed_all:
+                unavailable = True
+            elif 'kettlebell' in ex_lower and 'kettlebell' not in allowed and not allowed_all:
+                unavailable = True
 
         if contraindicated or unavailable:
             # Try to find a substitute that targets the same muscle or bodypart and is allowed
             substitute = None
-            for item in db:
-                item_body = [b.lower() for b in item.get('bodyParts',[])]
-                item_target = [t.lower() for t in item.get('targetMuscles',[])]
-                # match by muscle group or body part
-                match_muscle = False
-                if mg and (mg in item_body or mg in item_target):
-                    match_muscle = True
-                # skip exercises that hit injured body parts
-                if any(b in injuries for b in item_body):
-                    continue
-                item_eqs = [e.lower() for e in item.get('equipments',[])]
-                if not allowed_all and not any(e in allowed for e in item_eqs):
-                    continue
-                if match_muscle:
-                    substitute = item
-                    break
+            
+            # First, try to find body weight alternatives for common muscle groups
+            ex_lower = ex.lower()
+            if 'biceps' in ex_lower or 'curl' in ex_lower:
+                # Look for body weight bicep exercises
+                for item in db:
+                    item_eqs = [e.lower() for e in item.get('equipments',[])]
+                    if 'body weight' in item_eqs and any(word in item.get('name','').lower() for word in ['pull', 'chin']):
+                        substitute = item
+                        break
+            elif 'triceps' in ex_lower or 'press' in ex_lower:
+                # Look for body weight tricep exercises
+                for item in db:
+                    item_eqs = [e.lower() for e in item.get('equipments',[])]
+                    if 'body weight' in item_eqs and any(word in item.get('name','').lower() for word in ['push', 'dip']):
+                        substitute = item
+                        break
+            elif 'chest' in ex_lower or 'push' in ex_lower:
+                # Look for body weight chest exercises
+                for item in db:
+                    item_eqs = [e.lower() for e in item.get('equipments',[])]
+                    if 'body weight' in item_eqs and 'push' in item.get('name','').lower():
+                        substitute = item
+                        break
+            
+            # If no specific substitute found, try general matching
+            if not substitute:
+                for item in db:
+                    item_body = [b.lower() for b in item.get('bodyParts',[])]
+                    item_target = [t.lower() for t in item.get('targetMuscles',[])]
+                    # match by muscle group or body part
+                    match_muscle = False
+                    if mg and (mg in item_body or mg in item_target):
+                        match_muscle = True
+                    # skip exercises that hit injured body parts
+                    if any(b in injuries for b in item_body):
+                        continue
+                    item_eqs = [e.lower() for e in item.get('equipments',[])]
+                    if not allowed_all and not any(e in allowed for e in item_eqs):
+                        continue
+                    if match_muscle:
+                        substitute = item
+                        break
 
             if substitute:
                 name = substitute.get('name')
                 new_preds[name] = v.copy()
             else:
-                # No substitute: reduce volume/intensity as a conservative fallback
-                v2 = v.copy()
-                v2['sets'] = max(1, int(round(v2['sets'] * 0.7)))
-                v2['intensity'] = max(1, int(round(v2['intensity'] * 0.7)))
-                new_preds[ex] = v2
+                # No substitute found - skip this exercise entirely for bodyweight-only workouts
+                if allowed == {'body weight'}:
+                    continue  # Skip dumbbell exercises when only body weight is allowed
+                else:
+                    # For other equipment restrictions, reduce volume/intensity as fallback
+                    v2 = v.copy()
+                    v2['sets'] = max(1, int(round(v2['sets'] * 0.7)))
+                    v2['intensity'] = max(1, int(round(v2['intensity'] * 0.7)))
+                    new_preds[ex] = v2
         else:
             new_preds[ex] = v
 

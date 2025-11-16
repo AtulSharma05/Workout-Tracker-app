@@ -1,15 +1,18 @@
 # 🏋️ Workout Tracker App
 
-A full-stack workout tracking application with Flutter frontend and Node.js/Express/MongoDB backend. Track your fitness journey with real-time analytics, achievements, and rewards system.
+A full-stack workout tracking application with Flutter frontend and Node.js/Express/MongoDB backend. Track your fitness journey with AI-powered workout plans, real-time analytics, achievements, and rewards system.
 
 ## ✨ Features
 
-### 🤖 AI-Powered Workout Planning (NEW!)
-- **Personalized Plans** - AI-generated workout plans based on your goals and experience
-- **Smart Recommendations** - Exercise suggestions tailored to your equipment and preferences
-- **ML-Based Optimization** - Machine learning predicts optimal sets/reps for each exercise
-- **Natural Language** - Describe your fitness goals in plain English
-- **1500+ Exercise Database** - Comprehensive exercise library with detailed instructions
+### 🤖 AI-Powered Workout Planning
+- **Personalized 7-Day Plans** - AI-generated workout schedules based on your goals, experience, and available time
+- **Duration-Based Scaling** - Workouts adapt to your time (30/60/90 minutes) with appropriate exercise count
+- **Smart Exercise Distribution** - Round-robin algorithm ensures all training days get balanced exercises
+- **Natural Language Input** - Describe your fitness goals in plain English (e.g., "28 year old male, muscle gain, gym access, 4 days per week, 90 minutes")
+- **1500+ Exercise Database** - Comprehensive library with GIF demonstrations, instructions, and muscle targeting
+- **Animated Exercise Demos** - Click any exercise to see animated GIF demonstrations
+- **ML-Based Optimization** - Machine learning predicts optimal sets/reps/intensity for each exercise
+- **Flexible Training Days** - Supports 1-7 days per week with intelligent rest day placement
 
 ### 🎯 Core Features
 - **Workout Logging** - Track exercises with sets, reps, weight, duration, and calories
@@ -26,16 +29,18 @@ A full-stack workout tracking application with Flutter frontend and Node.js/Expr
 
 ### 📊 Analytics
 - **Overview Cards** - Total workouts, streak, time, calories
-- **Weekly Progress** - Bar chart showing workout frequency
+- **Weekly Progress** - Bar chart showing workout frequency  
 - **Workout Distribution** - Pie chart of workout types
 - **Top Exercises** - Most performed exercises ranked
+- **Period Selection** - View stats for last 7, 30, or 90 days
 
 ### 👤 Profile
 - **User Information** - Display name, email, avatar with initials
 - **Stats Dashboard** - Total workouts, minutes, calories, averages
 - **Workout Breakdown** - Distribution by type
-- **Achievement Badges** - Visual progress indicators
+- **Achievement Badges** - Visual progress indicators with completion tracking
 - **Streak Milestones** - Progress to next milestone (7/14/30/60/100/365 days)
+- **Recent Activity** - Last 10 workouts with detailed breakdown
 
 ### 🔐 Authentication
 - **JWT-based** - Secure token authentication
@@ -114,19 +119,29 @@ new/
 
    The server will start on `http://0.0.0.0:3000` (accessible from network devices)
 
-6. **Start AI Planner (Optional - for AI workout plans):**
+6. **Start AI Planner (for AI workout plans):**
    ```bash
-   # Install Python dependencies
+   # Navigate to AI planner directory
    cd ai-planner
-   pip install fastapi uvicorn[standard] scikit-learn pandas numpy joblib requests
+   
+   # Install Python dependencies
+   pip install -r requirements.txt
    
    # Start the Python API server
    python api_server.py
    ```
    
    The AI planner will start on `http://localhost:8000`
+   - Health Check: `http://localhost:8000/health`
    - API Docs: `http://localhost:8000/docs`
-   - Note: The AI planner is optional. The app works without it, but AI workout plan generation will be unavailable.
+   - Exercise Search: `http://localhost:8000/search?q=bench`
+   
+   **Key Features:**
+   - Natural language workout plan generation
+   - 1500+ exercise database with GIF URLs
+   - ML-based exercise parameter prediction
+   - Duration-aware exercise scaling (30/60/90 min)
+   - 7-day workout scheduling with rest days
 
 ### Frontend Setup
 
@@ -273,22 +288,46 @@ Visit in browser: `http://localhost:3000/health`
 - connectivity_plus (network checking)
 - flutter_secure_storage (token storage)
 
+## ✅ Recent Updates
+
+### November 2025
+- ✅ **AI Workout Plan Generator** - Full 7-day personalized workout plans
+- ✅ **Exercise GIF Integration** - Animated demonstrations for all exercises
+- ✅ **Duration-Based Scaling** - Workouts scale with time selection (30/60/90 min)
+- ✅ **Improved Navigation** - Fixed back button behavior on profile/analytics/features
+- ✅ **Rest Day Display** - Visual rest day cards with recovery messaging
+- ✅ **Round-Robin Distribution** - Better exercise distribution across training days
+- ✅ **Natural Language Parser** - Supports 1-7 training days per week
+
 ## 🚀 Future Enhancements
 
-- [ ] Social features & community
-- [ ] Workout plans & templates
-- [ ] AI workout recommendations
-- [ ] Progress photos & body measurements
-- [ ] Dark mode
+- [ ] Social features & community challenges
+- [ ] Progress photos & body measurements tracking
+- [ ] Dark mode theme
 - [ ] Export workout data (CSV/PDF)
-- [ ] Rest timer for sets
-- [ ] Push notifications
-- [ ] Exercise library with instructions
+- [ ] Rest timer for sets with notifications
+- [ ] Push notifications for workout reminders
 - [ ] Advanced analytics & personal records
+- [ ] Workout plan templates sharing
+- [ ] Integration with fitness wearables
+- [ ] Nutrition tracking
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## ✅ Recent Updates
+
+### November 2025
+- ✅ **AI Workout Plan Generator** - Full 7-day personalized workout plans with ML-based predictions
+- ✅ **Exercise GIF Integration** - Animated demonstrations for 1500+ exercises
+- ✅ **Duration-Based Scaling** - Workouts scale with time selection (30/60/90 min)
+- ✅ **Improved Navigation** - Fixed back button behavior on profile/analytics/features pages
+- ✅ **Rest Day Display** - Visual rest day cards with recovery messaging
+- ✅ **Round-Robin Distribution** - Better exercise distribution across all training days
+- ✅ **Natural Language Parser** - Enhanced to support 1-7 training days per week
+- ✅ **Exercise Database Service** - Integrated exercisedb.dev API with caching
+- ✅ **Detailed Exercise Dialog** - Modal with GIF, instructions, muscles, and equipment
 
 ## 🤝 Contributing
 

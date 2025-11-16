@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../models/workout_stats.dart';
 import '../services/workout_service.dart';
 import '../theme/app_theme.dart';
+import 'home_page.dart';
 
 /// Analytics Page
 /// Shows real workout statistics with charts
@@ -24,6 +25,15 @@ class _AnalyticsPageState extends State<AnalyticsPage> {
     return Scaffold(
       backgroundColor: AppTheme.cream,
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppTheme.darkBrown),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const HomePage()),
+            );
+          },
+        ),
         title: const Text(
           'Workout Analytics',
           style: TextStyle(color: AppTheme.darkBrown),

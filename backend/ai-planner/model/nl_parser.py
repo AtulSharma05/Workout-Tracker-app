@@ -32,6 +32,7 @@ def parse_natural_language_input(user_message: str) -> Dict:
         'Goal': 'Muscle Gain',
         'Fitness_Level': 'Intermediate',
         'Days_per_Week': 4,
+        'Duration': 60,  # Default 60 minutes per workout
         'Equipment': 'Gym',
         'Body_Type': 'Mesomorph',
         'Injuries': []
@@ -69,8 +70,17 @@ def parse_natural_language_input(user_message: str) -> Dict:
         if 1 <= days <= 7:  # Allow 1-7 days per week
             profile['Days_per_Week'] = days
     
+    # Extract workout duration (in minutes)
+    duration_match = re.search(r'(\d+)\s*(?:min|minute)', message_lower)
+    if duration_match:
+        duration = int(duration_match.group(1))
+        if 20 <= duration <= 180:  # 20 minutes to 3 hours
+            profile['Duration'] = duration
+    
     # Extract equipment/location
-    if any(word in message_lower for word in ['home', 'house', 'apartment']):
+    if any(word in message_lower for word in ['bodyweight', 'body weight', 'no equipment', 'equipment free']):
+        profile['Equipment'] = 'Body Weight'
+    elif any(word in message_lower for word in ['home', 'house', 'apartment']):
         profile['Equipment'] = 'Home'
     elif any(word in message_lower for word in ['gym', 'fitness center', 'health club']):
         profile['Equipment'] = 'Gym'

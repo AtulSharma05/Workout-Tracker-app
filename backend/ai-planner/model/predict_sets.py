@@ -235,6 +235,7 @@ def predict(user_profile, target_exercises=None):
         'goal': get_profile_value(user_profile, 'goal', 'Goal', 'Muscle Gain'),
         'experience': get_profile_value(user_profile, 'experience', 'Fitness_Level', 'Intermediate'),
         'training_days': get_profile_value(user_profile, 'training_days', 'Days_per_Week', 4),
+        'duration': get_profile_value(user_profile, 'duration', 'Duration', 60),  # Workout duration in minutes
         'location': get_profile_value(user_profile, 'location', 'Equipment', 'Gym'),
         'body_type': get_profile_value(user_profile, 'body_type', 'Body_Type', 'Mesomorph')
     }
@@ -276,15 +277,24 @@ def predict(user_profile, target_exercises=None):
     for muscle_group, exercises in recommendations.items():
         results[muscle_group] = []
         
-        # Adjust number of exercises based on training days
-        if normalized_profile['training_days'] >= 7:
-            num_exercises = min(5, len(exercises))  # 5 exercises for 7-day plans
-        elif normalized_profile['training_days'] >= 5:
-            num_exercises = min(4, len(exercises))  # 4 exercises for 5-6 day plans
-        else:
-            num_exercises = min(3, len(exercises))  # 3 exercises for 1-4 day plans
+        # Adjust number of exercises based on training days AND duration
+        duration = normalized_profile.get('duration', 60)  # Default 60 minutes
         
-        for exercise in exercises[:num_exercises]:  # Scale with training days
+        # Base count from training days
+        if normalized_profile['training_days'] >= 7:
+            base_exercises = 5
+        elif normalized_profile['training_days'] >= 5:
+            base_exercises = 4
+        else:
+            base_exercises = 3
+        
+        # Scale by duration (30min=0.5x, 60min=1x, 90min=1.5x, 120min=2x)
+        duration_multiplier = duration / 60.0
+        num_exercises = round(base_exercises * duration_multiplier)  # Use round instead of int
+        num_exercises = min(num_exercises, len(exercises))  # Don't exceed available exercises
+        num_exercises = max(2, num_exercises)  # At least 2 exercises per muscle group
+        
+        for exercise in exercises[:num_exercises]:  # Scale with training days and duration
             try:
                 params = predictor.predict_exercise_parameters(
                     normalized_profile, exercise['name'], muscle_group

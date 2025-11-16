@@ -112,7 +112,7 @@ class AIPlannerService {
    * @private
    */
   _buildMessage(params) {
-    const {goal, experience, daysPerWeek, equipment, targetMuscles} = params;
+    const {goal, experience, daysPerWeek, equipment, targetMuscles, duration} = params;
     
     const goalText = {
       'muscle_gain': 'build muscle',
@@ -122,6 +122,11 @@ class AIPlannerService {
     
     let msg = `I am a ${experience} level person looking to ${goalText}. `;
     msg += `I can work out ${daysPerWeek} days per week. `;
+    
+    // Add duration if specified
+    if (duration) {
+      msg += `Each workout should be ${duration} minutes. `;
+    }
     
     if (equipment && equipment.length > 0) {
       msg += `I have access to: ${equipment.join(', ')}. `;
