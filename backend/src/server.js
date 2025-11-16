@@ -23,6 +23,8 @@ const authRoutes = require('./routes/auth');
 const frontendAuthRoutes = require('./routes/frontendAuth'); // Frontend-compatible routes
 const workoutRoutes = require('./routes/workout');
 const workoutLoggingRoutes = require('./routes/workoutLogging'); // Frontend-compatible workout routes
+const workoutPlanRoutes = require('./routes/workoutPlanRoutes'); // AI Workout Planner routes
+const exerciseRoutes = require('./routes/exerciseRoutes'); // Exercise database routes
 // const userRoutes = require('./routes/users');
 // const blogRoutes = require('./routes/blogs');
 
@@ -86,6 +88,8 @@ apiRouter.get('/', (req, res) => {
       'auth_user (frontend)': `/api/${API_VERSION}/auth_user`, // Frontend-compatible routes
       workouts: `/api/${API_VERSION}/workouts`,
       'workout_logging (frontend)': `/api/${API_VERSION}/workout_logging`, // Frontend-compatible workout routes
+      'workout_plans (AI)': `/api/${API_VERSION}/workout-plans`, // AI Workout Planner
+      exercises: `/api/${API_VERSION}/exercises`, // Exercise database
       users: `/api/${API_VERSION}/users`,
       blogs: `/api/${API_VERSION}/blogs`
     },
@@ -98,6 +102,8 @@ apiRouter.use('/auth', authRoutes);
 apiRouter.use('/auth_user', frontendAuthRoutes); // Frontend-compatible auth routes
 apiRouter.use('/workouts', workoutRoutes);
 apiRouter.use('/workout_logging', workoutLoggingRoutes); // Frontend-compatible workout routes
+apiRouter.use('/workout-plans', workoutPlanRoutes); // AI Workout Planner routes
+apiRouter.use('/exercises', exerciseRoutes); // Exercise database routes
 // apiRouter.use('/users', userRoutes);
 // apiRouter.use('/blogs', blogRoutes);
 

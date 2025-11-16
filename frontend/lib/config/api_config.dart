@@ -41,6 +41,16 @@ class ApiConfig {
   static const String workoutEndpoint = '/workouts';
   static const String workoutStatsEndpoint = '/workouts/stats';
   
+  // AI Workout Planner endpoints
+  static const String workoutPlansGenerateEndpoint = '/workout-plans/generate';
+  static const String workoutPlansRecommendEndpoint = '/workout-plans/recommend-exercises';
+  static const String workoutPlansPredictEndpoint = '/workout-plans/predict-sets';
+  static const String workoutPlansStatusEndpoint = '/workout-plans/status';
+  
+  // Exercise database endpoints
+  static const String exercisesSearchEndpoint = '/exercises/search';
+  static const String exercisesEndpoint = '/exercises';
+  
   /// Timeout durations
   static const Duration connectionTimeout = Duration(seconds: 30);
   static const Duration receiveTimeout = Duration(seconds: 30);

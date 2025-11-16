@@ -169,16 +169,15 @@ class FeaturesPage extends StatelessWidget {
                 ),
                 _FeatureCard(
                   title: 'Workout Plans',
-                  icon: Icons.calendar_month,
+                  icon: Icons.auto_awesome,
                   gradient: const LinearGradient(
                     colors: [Color(0xFF834D9B), Color(0xFFD04ED6)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  badge: 'Coming Soon',
-                  enabled: false,
+                  badge: 'AI',
                   onTap: () {
-                    _showComingSoonDialog(context, 'Workout Plans');
+                    Navigator.pushNamed(context, '/create-workout-plan');
                   },
                 ),
                 _FeatureCard(

@@ -38,6 +38,7 @@ class ApiService {
           debugPrint('🌐 REQUEST[${options.method}] => ${options.uri}');
           debugPrint('📤 Headers: ${options.headers}');
           debugPrint('📤 Data: ${options.data}');
+          debugPrint('🔑 Auth Token Present: ${_authToken != null}');
         }
         
         return handler.next(options);

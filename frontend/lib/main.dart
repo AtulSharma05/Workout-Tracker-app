@@ -4,6 +4,8 @@ import 'services/connectivity_service.dart';
 import 'services/api_service.dart';
 import 'services/auth_service.dart';
 import 'services/workout_service.dart';
+import 'services/workout_plan_service.dart';
+import 'services/exercise_database_service.dart';
 import 'theme/app_theme.dart';
 import 'pages/welcome_page.dart';
 import 'pages/login_page.dart';
@@ -11,6 +13,7 @@ import 'pages/register_page.dart';
 import 'pages/home_page.dart';
 import 'pages/log_workout_page.dart';
 import 'pages/workout_history_page.dart';
+import 'pages/create_workout_plan_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +30,8 @@ class MyApp extends StatelessWidget {
     final apiService = ApiService(connectivityService);
     final authService = AuthService(apiService);
     final workoutService = WorkoutService(apiService);
+    final workoutPlanService = WorkoutPlanService(apiService);
+    final exerciseDatabaseService = ExerciseDatabaseService(apiService);
 
     return MultiProvider(
       providers: [
@@ -34,6 +39,8 @@ class MyApp extends StatelessWidget {
         Provider<ApiService>.value(value: apiService),
         Provider<AuthService>.value(value: authService),
         Provider<WorkoutService>.value(value: workoutService),
+        Provider<WorkoutPlanService>.value(value: workoutPlanService),
+        Provider<ExerciseDatabaseService>.value(value: exerciseDatabaseService),
       ],
       child: MaterialApp(
         title: 'Workout Tracker',
@@ -44,7 +51,8 @@ class MyApp extends StatelessWidget {
           // Set auth token before navigating to protected routes
           if (settings.name == '/home' || 
               settings.name == '/log-workout' || 
-              settings.name == '/workout-history') {
+              settings.name == '/workout-history' ||
+              settings.name == '/create-workout-plan') {
             return MaterialPageRoute(
               builder: (context) => FutureBuilder(
                 future: _setAuthToken(context),
@@ -60,6 +68,8 @@ class MyApp extends StatelessWidget {
                         );
                       case '/workout-history':
                         return const WorkoutHistoryPage();
+                      case '/create-workout-plan':
+                        return const CreateWorkoutPlanPage();
                       default:
                         return const WelcomePage();
                     }

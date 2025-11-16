@@ -2,6 +2,8 @@ import '../config/api_config.dart';
 import '../models/user.dart';
 import 'api_service.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter/foundation.dart';
+import 'dart:math';
 
 /// Authentication Service
 /// Handles user login, registration, and token management
@@ -144,7 +146,9 @@ class AuthService {
   
   /// Get stored token
   Future<String?> getToken() async {
-    return await _secureStorage.read(key: 'auth_token');
+    final token = await _secureStorage.read(key: 'auth_token');
+    debugPrint('🔑 Retrieved token: ${token != null ? "${token.substring(0, min(20, token.length))}..." : "null"}');
+    return token;
   }
   
   /// Save token securely

@@ -4,6 +4,13 @@ A full-stack workout tracking application with Flutter frontend and Node.js/Expr
 
 ## ✨ Features
 
+### 🤖 AI-Powered Workout Planning (NEW!)
+- **Personalized Plans** - AI-generated workout plans based on your goals and experience
+- **Smart Recommendations** - Exercise suggestions tailored to your equipment and preferences
+- **ML-Based Optimization** - Machine learning predicts optimal sets/reps for each exercise
+- **Natural Language** - Describe your fitness goals in plain English
+- **1500+ Exercise Database** - Comprehensive exercise library with detailed instructions
+
 ### 🎯 Core Features
 - **Workout Logging** - Track exercises with sets, reps, weight, duration, and calories
 - **Workout Types** - Strength Training, Cardio, Flexibility, Sports
@@ -40,6 +47,10 @@ A full-stack workout tracking application with Flutter frontend and Node.js/Expr
 ```
 new/
 ├── backend/          # Node.js Express API Server
+│   ├── ai-planner/   # Python AI Workout Planner
+│   │   ├── model/    # ML models and algorithms
+│   │   ├── data/     # Exercise database (1500+ exercises)
+│   │   └── api_server.py  # FastAPI server
 │   ├── src/
 │   │   ├── config/   # Database configuration
 │   │   ├── models/   # MongoDB schemas (User, Workout)
@@ -66,6 +77,7 @@ new/
 ### Prerequisites
 - **Node.js** (v16+)
 - **MongoDB** (v5+)
+- **Python** (v3.8+) - For AI workout planner
 - **Flutter** (v3.0+)
 - **Android Studio** or **Xcode** (for mobile development)
 
@@ -101,6 +113,20 @@ new/
    ```
 
    The server will start on `http://0.0.0.0:3000` (accessible from network devices)
+
+6. **Start AI Planner (Optional - for AI workout plans):**
+   ```bash
+   # Install Python dependencies
+   cd ai-planner
+   pip install fastapi uvicorn[standard] scikit-learn pandas numpy joblib requests
+   
+   # Start the Python API server
+   python api_server.py
+   ```
+   
+   The AI planner will start on `http://localhost:8000`
+   - API Docs: `http://localhost:8000/docs`
+   - Note: The AI planner is optional. The app works without it, but AI workout plan generation will be unavailable.
 
 ### Frontend Setup
 
