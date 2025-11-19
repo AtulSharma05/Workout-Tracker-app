@@ -1,0 +1,7 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+Bn6TXyO,0,left_hip_angle,133.22,"(0.484,0.698)",start
+Bn6TXyO,0,torso_angle,83.22918445765903,,start
+Bn6TXyO,3,left_hip_angle,135.5,"(0.488,0.708)",quarter
+Bn6TXyO,3,torso_angle,84.28785090555473,,quarter
+Bn6TXyO,11,left_hip_angle,134.17,"(0.475,0.696)",end
+Bn6TXyO,11,torso_angle,86.50848602783476,,end

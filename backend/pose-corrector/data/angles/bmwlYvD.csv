@@ -1,0 +1,13 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+bmwlYvD,3,left_hip_angle,177.33,"(0.441,0.384)",quarter
+bmwlYvD,3,torso_angle,15.033233820907885,,quarter
+bmwlYvD,3,right_hip_angle,176.21,"(0.430,0.384)",quarter
+bmwlYvD,6,left_hip_angle,25.94,"(0.459,0.353)",peak
+bmwlYvD,6,torso_angle,22.577342196213532,,peak
+bmwlYvD,6,right_hip_angle,34.22,"(0.455,0.356)",peak
+bmwlYvD,9,left_hip_angle,177.77,"(0.438,0.365)",return
+bmwlYvD,9,torso_angle,20.87359426059127,,return
+bmwlYvD,9,right_hip_angle,177.54,"(0.451,0.363)",return
+bmwlYvD,11,left_hip_angle,175.08,"(0.434,0.389)",end
+bmwlYvD,11,torso_angle,17.680216687417865,,end
+bmwlYvD,11,right_hip_angle,179.71,"(0.458,0.366)",end

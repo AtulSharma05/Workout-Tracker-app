@@ -1,0 +1,5 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+fTlkJop,6,right_shoulder_angle,28.15,"(0.227,0.398)",peak
+fTlkJop,9,right_shoulder_angle,41.54,"(0.230,0.392)",return
+fTlkJop,11,right_shoulder_angle,13.8,"(0.244,0.389)",end
+fTlkJop,11,right_elbow_angle,168.88,"(0.377,0.421)",end

@@ -1,0 +1,4 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+D1xYJAU,6,right_shoulder_angle,18.35,"(0.466,0.249)",peak
+D1xYJAU,9,right_shoulder_angle,21.48,"(0.466,0.254)",return
+D1xYJAU,11,right_shoulder_angle,24.22,"(0.463,0.254)",end

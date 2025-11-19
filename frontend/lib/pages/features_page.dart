@@ -171,10 +171,10 @@ class FeaturesPage extends StatelessWidget {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  badge: 'Coming Soon',
-                  enabled: false,
+                  badge: 'AI',
+                  enabled: true,
                   onTap: () {
-                    _showComingSoonDialog(context, 'AI Pose Detection');
+                    _showExerciseSelectionDialog(context);
                   },
                 ),
                 _FeatureCard(
@@ -248,6 +248,52 @@ class FeaturesPage extends StatelessWidget {
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: const Text('Got it!'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showExerciseSelectionDialog(BuildContext context) {
+    final exercises = [
+      'Push-up',
+      'Squat',
+      'Plank',
+      'Bicep Curl',
+      'Shoulder Press',
+      'Lunge',
+      'Jumping Jack',
+    ];
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Select Exercise'),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: exercises.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: const Icon(Icons.fitness_center),
+                title: Text(exercises[index]),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(
+                    context,
+                    '/pose-analysis',
+                    arguments: {'exerciseName': exercises[index].toLowerCase()},
+                  );
+                },
+              );
+            },
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
           ),
         ],
       ),

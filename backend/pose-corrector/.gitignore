@@ -1,0 +1,8 @@
+venv-py310/
+__pycache__/
+*.pyc
+.DS_Store
+venv/
+.venv/
+venv-py310/
+env/

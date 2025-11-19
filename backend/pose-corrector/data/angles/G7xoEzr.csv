@@ -1,0 +1,6 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+G7xoEzr,6,torso_angle,170.77689720894764,,peak
+G7xoEzr,6,left_elbow_angle,147.4,"(0.422,0.480)",peak
+G7xoEzr,6,right_hip_angle,98.99,"(0.324,0.438)",peak
+G7xoEzr,6,right_elbow_angle,172.07,"(0.520,0.562)",peak
+G7xoEzr,6,left_hip_angle,150.15,"(0.267,0.407)",peak

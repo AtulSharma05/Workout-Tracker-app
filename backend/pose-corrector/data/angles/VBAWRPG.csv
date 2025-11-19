@@ -1,0 +1,11 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+VBAWRPG,0,torso_angle,96.51964665098612,,start
+VBAWRPG,0,right_hip_angle,155.86,"(0.509,0.433)",start
+VBAWRPG,3,torso_angle,96.63256258965342,,quarter
+VBAWRPG,3,right_hip_angle,156.02,"(0.512,0.431)",quarter
+VBAWRPG,6,torso_angle,96.70545340770452,,peak
+VBAWRPG,6,right_hip_angle,156.22,"(0.513,0.429)",peak
+VBAWRPG,9,torso_angle,96.96994770429917,,return
+VBAWRPG,9,right_hip_angle,155.84,"(0.515,0.427)",return
+VBAWRPG,11,torso_angle,97.05580120521846,,end
+VBAWRPG,11,right_hip_angle,155.89,"(0.517,0.427)",end

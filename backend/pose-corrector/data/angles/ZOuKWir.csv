@@ -1,0 +1,11 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+ZOuKWir,0,left_shoulder_angle,24.71,"(0.194,0.590)",start
+ZOuKWir,0,left_elbow_angle,99.26,"(0.271,0.623)",start
+ZOuKWir,3,left_shoulder_angle,59.48,"(0.226,0.590)",quarter
+ZOuKWir,3,left_elbow_angle,41.32,"(0.281,0.670)",quarter
+ZOuKWir,6,left_shoulder_angle,53.68,"(0.250,0.419)",peak
+ZOuKWir,6,left_elbow_angle,160.52,"(0.282,0.555)",peak
+ZOuKWir,9,left_shoulder_angle,52.07,"(0.237,0.475)",return
+ZOuKWir,9,left_elbow_angle,141.24,"(0.282,0.577)",return
+ZOuKWir,11,left_shoulder_angle,34.98,"(0.221,0.508)",end
+ZOuKWir,11,left_elbow_angle,129.03,"(0.275,0.574)",end

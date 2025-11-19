@@ -1,0 +1,3 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+ookVu2D,9,left_shoulder_angle,36.79,"(0.351,0.555)",return
+ookVu2D,9,left_elbow_angle,163.37,"(0.552,0.537)",return

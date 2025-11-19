@@ -1,0 +1,4 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+UfePqpx,0,right_hip_angle,75.42,"(0.468,0.573)",start
+UfePqpx,6,right_hip_angle,178.36,"(0.507,0.509)",peak
+UfePqpx,11,right_hip_angle,174.75,"(0.535,0.603)",end

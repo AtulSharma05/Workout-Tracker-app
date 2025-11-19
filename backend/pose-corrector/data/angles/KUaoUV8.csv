@@ -1,0 +1,11 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+KUaoUV8,0,right_shoulder_angle,84.44,"(0.596,0.520)",start
+KUaoUV8,0,left_shoulder_angle,96.17,"(0.549,0.572)",start
+KUaoUV8,0,torso_angle,101.90685492139485,,start
+KUaoUV8,0,right_hip_angle,60.67,"(0.367,0.485)",start
+KUaoUV8,0,right_knee_angle,164.27,"(0.446,0.696)",start
+KUaoUV8,3,right_shoulder_angle,80.06,"(0.590,0.527)",quarter
+KUaoUV8,3,left_shoulder_angle,91.85,"(0.585,0.561)",quarter
+KUaoUV8,3,torso_angle,101.61605042413935,,quarter
+KUaoUV8,3,right_hip_angle,56.84,"(0.357,0.486)",quarter
+KUaoUV8,3,right_knee_angle,156.39,"(0.447,0.695)",quarter

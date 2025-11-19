@@ -1,0 +1,15 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+ykHcWme,0,right_knee_angle,35.13,"(0.302,0.701)",start
+ykHcWme,0,right_elbow_angle,169.75,"(0.344,0.652)",start
+ykHcWme,3,right_ankle_angle,118.83,"(0.381,0.811)",quarter
+ykHcWme,3,right_knee_angle,49.1,"(0.399,0.704)",quarter
+ykHcWme,3,right_elbow_angle,168.04,"(0.344,0.652)",quarter
+ykHcWme,6,right_ankle_angle,115.87,"(0.385,0.793)",peak
+ykHcWme,6,right_knee_angle,31.69,"(0.358,0.663)",peak
+ykHcWme,6,right_elbow_angle,166.93,"(0.344,0.653)",peak
+ykHcWme,9,right_ankle_angle,123.74,"(0.371,0.799)",return
+ykHcWme,9,right_knee_angle,27.49,"(0.385,0.670)",return
+ykHcWme,9,right_elbow_angle,166.68,"(0.345,0.652)",return
+ykHcWme,11,right_ankle_angle,136.16,"(0.343,0.832)",end
+ykHcWme,11,right_knee_angle,28.27,"(0.375,0.699)",end
+ykHcWme,11,right_elbow_angle,165.87,"(0.348,0.656)",end

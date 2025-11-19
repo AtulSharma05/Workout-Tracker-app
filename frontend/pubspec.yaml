@@ -63,6 +63,18 @@ dependencies:
   # Toast/Snackbar messages
   fluttertoast: ^8.2.4
   intl: ^0.20.2
+  
+  # Camera for pose detection
+  camera: ^0.10.5+5
+  
+  # WebSocket for real-time pose analysis
+  web_socket_channel: ^2.4.0
+  
+  # Permissions
+  permission_handler: ^11.0.1
+  
+  # Image processing
+  image: ^4.0.17
 
 dev_dependencies:
   flutter_test:

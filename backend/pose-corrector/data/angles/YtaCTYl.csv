@@ -1,0 +1,6 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+YtaCTYl,0,right_elbow_angle,108.07,"(0.447,0.383)",start
+YtaCTYl,3,right_elbow_angle,104.51,"(0.444,0.373)",quarter
+YtaCTYl,6,right_elbow_angle,103.49,"(0.444,0.372)",peak
+YtaCTYl,9,right_elbow_angle,103.04,"(0.441,0.366)",return
+YtaCTYl,11,right_elbow_angle,102.82,"(0.441,0.365)",end

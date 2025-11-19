@@ -1,0 +1,8 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+1IG6gVF,0,torso_angle,74.0263444276294,,start
+1IG6gVF,3,torso_angle,77.10565541207984,,quarter
+1IG6gVF,6,torso_angle,76.48809686496962,,peak
+1IG6gVF,9,torso_angle,75.42317885307378,,return
+1IG6gVF,9,right_hip_angle,176.27,"(0.434,0.485)",return
+1IG6gVF,11,torso_angle,79.75753333363531,,end
+1IG6gVF,11,right_hip_angle,178.38,"(0.481,0.482)",end

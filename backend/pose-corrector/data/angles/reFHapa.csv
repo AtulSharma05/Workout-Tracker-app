@@ -1,0 +1,13 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+reFHapa,0,left_elbow_angle,173.13,"(0.449,0.574)",start
+reFHapa,0,torso_angle,110.47255553634467,,start
+reFHapa,0,left_shoulder_angle,53.21,"(0.547,0.518)",start
+reFHapa,6,left_elbow_angle,165.68,"(0.467,0.375)",peak
+reFHapa,6,torso_angle,123.34818270784946,,peak
+reFHapa,6,left_shoulder_angle,40.36,"(0.494,0.524)",peak
+reFHapa,9,left_elbow_angle,158.57,"(0.475,0.386)",return
+reFHapa,9,torso_angle,122.5578540089614,,return
+reFHapa,9,left_shoulder_angle,44.17,"(0.493,0.528)",return
+reFHapa,11,left_elbow_angle,133.39,"(0.430,0.559)",end
+reFHapa,11,torso_angle,122.42795099187519,,end
+reFHapa,11,left_shoulder_angle,54.29,"(0.498,0.540)",end

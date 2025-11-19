@@ -1,0 +1,11 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+pj0X0tF,0,torso_angle,2.2847561608623215,,start
+pj0X0tF,0,left_elbow_angle,174.27,"(0.546,0.245)",start
+pj0X0tF,0,right_hip_angle,179.11,"(0.472,0.515)",start
+pj0X0tF,0,right_elbow_angle,168.21,"(0.447,0.253)",start
+pj0X0tF,0,left_hip_angle,172.57,"(0.517,0.512)",start
+pj0X0tF,11,torso_angle,4.058053539291359,,end
+pj0X0tF,11,left_elbow_angle,141.97,"(0.548,0.382)",end
+pj0X0tF,11,right_hip_angle,171.36,"(0.479,0.533)",end
+pj0X0tF,11,right_elbow_angle,172.96,"(0.468,0.470)",end
+pj0X0tF,11,left_hip_angle,173.45,"(0.518,0.528)",end

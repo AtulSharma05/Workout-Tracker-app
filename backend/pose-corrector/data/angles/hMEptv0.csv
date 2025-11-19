@@ -1,0 +1,4 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+hMEptv0,11,left_shoulder_angle,12.98,"(0.438,0.567)",end
+hMEptv0,11,right_shoulder_angle,37.05,"(0.534,0.508)",end
+hMEptv0,11,torso_angle,139.54765072105934,,end

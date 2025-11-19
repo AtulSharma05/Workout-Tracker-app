@@ -1,0 +1,7 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+qatbkEd,9,left_hip_angle,86.92,"(0.590,0.806)",return
+qatbkEd,9,torso_angle,32.53177268028707,,return
+qatbkEd,9,right_hip_angle,92.39,"(0.530,0.836)",return
+qatbkEd,11,left_hip_angle,88.38,"(0.602,0.801)",end
+qatbkEd,11,torso_angle,36.328976788808234,,end
+qatbkEd,11,right_hip_angle,98.21,"(0.539,0.824)",end

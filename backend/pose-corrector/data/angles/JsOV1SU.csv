@@ -1,0 +1,7 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+JsOV1SU,0,torso_angle,2.3737454326359693,,start
+JsOV1SU,0,right_shoulder_angle,172.18,"(0.487,0.445)",start
+JsOV1SU,0,left_shoulder_angle,172.29,"(0.564,0.446)",start
+JsOV1SU,11,torso_angle,3.551086627862623,,end
+JsOV1SU,11,right_shoulder_angle,98.62,"(0.486,0.453)",end
+JsOV1SU,11,left_shoulder_angle,147.18,"(0.562,0.448)",end

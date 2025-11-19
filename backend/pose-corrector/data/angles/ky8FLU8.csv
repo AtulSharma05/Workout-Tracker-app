@@ -1,0 +1,7 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+ky8FLU8,0,right_shoulder_angle,149.13,"(0.490,0.434)",start
+ky8FLU8,0,torso_angle,2.741876142193611,,start
+ky8FLU8,3,right_shoulder_angle,95.04,"(0.543,0.420)",quarter
+ky8FLU8,3,torso_angle,9.656176185159412,,quarter
+ky8FLU8,11,right_shoulder_angle,136.86,"(0.517,0.422)",end
+ky8FLU8,11,torso_angle,2.4598970125989132,,end

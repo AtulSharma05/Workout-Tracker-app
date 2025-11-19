@@ -1,0 +1,17 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+5VCj6iH,0,left_hip_angle,97.12,"(0.527,0.627)",start
+5VCj6iH,0,left_knee_angle,93.4,"(0.369,0.710)",start
+5VCj6iH,0,right_hip_angle,83.82,"(0.464,0.624)",start
+5VCj6iH,0,right_knee_angle,80.64,"(0.298,0.694)",start
+5VCj6iH,6,left_hip_angle,175.24,"(0.464,0.482)",peak
+5VCj6iH,6,left_knee_angle,169.88,"(0.440,0.659)",peak
+5VCj6iH,6,right_hip_angle,161.94,"(0.394,0.485)",peak
+5VCj6iH,6,right_knee_angle,160.87,"(0.368,0.651)",peak
+5VCj6iH,9,left_hip_angle,155.5,"(0.436,0.501)",return
+5VCj6iH,9,left_knee_angle,145.1,"(0.376,0.657)",return
+5VCj6iH,9,right_hip_angle,156.8,"(0.418,0.495)",return
+5VCj6iH,9,right_knee_angle,140.46,"(0.352,0.645)",return
+5VCj6iH,11,left_hip_angle,137.97,"(0.440,0.589)",end
+5VCj6iH,11,left_knee_angle,119.2,"(0.358,0.693)",end
+5VCj6iH,11,right_hip_angle,132.7,"(0.420,0.571)",end
+5VCj6iH,11,right_knee_angle,109.5,"(0.334,0.664)",end

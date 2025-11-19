@@ -1,0 +1,8 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+mym4hJo,0,left_elbow_angle,102.3,"(0.359,0.268)",start
+mym4hJo,3,left_elbow_angle,103.14,"(0.350,0.267)",quarter
+mym4hJo,6,left_elbow_angle,103.16,"(0.348,0.266)",peak
+mym4hJo,9,left_elbow_angle,103.16,"(0.345,0.265)",return
+mym4hJo,9,right_elbow_angle,146.03,"(0.212,0.481)",return
+mym4hJo,11,left_elbow_angle,102.09,"(0.346,0.265)",end
+mym4hJo,11,right_elbow_angle,142.82,"(0.217,0.481)",end

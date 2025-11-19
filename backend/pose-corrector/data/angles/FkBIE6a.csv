@@ -1,0 +1,11 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+FkBIE6a,0,right_hip_angle,166.6,"(0.605,0.454)",start
+FkBIE6a,0,right_knee_angle,142.47,"(0.430,0.522)",start
+FkBIE6a,3,right_hip_angle,167.62,"(0.593,0.456)",quarter
+FkBIE6a,3,right_knee_angle,151.5,"(0.420,0.521)",quarter
+FkBIE6a,6,right_hip_angle,168.14,"(0.594,0.455)",peak
+FkBIE6a,6,right_knee_angle,97.44,"(0.413,0.521)",peak
+FkBIE6a,9,right_hip_angle,167.17,"(0.591,0.455)",return
+FkBIE6a,9,right_knee_angle,119.88,"(0.415,0.521)",return
+FkBIE6a,11,right_hip_angle,165.29,"(0.593,0.456)",end
+FkBIE6a,11,right_knee_angle,144.69,"(0.426,0.525)",end

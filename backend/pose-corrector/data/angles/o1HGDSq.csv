@@ -1,0 +1,5 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+o1HGDSq,0,torso_angle,49.82079360007101,,start
+o1HGDSq,3,torso_angle,46.01152262284985,,quarter
+o1HGDSq,9,torso_angle,50.04692793822653,,return
+o1HGDSq,11,torso_angle,49.15308282849181,,end

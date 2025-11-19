@@ -1,0 +1,9 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+SaDOwk7,0,right_hip_angle,92.18,"(0.726,0.669)",start
+SaDOwk7,0,right_knee_angle,88.03,"(0.858,0.774)",start
+SaDOwk7,4,right_hip_angle,84.55,"(0.718,0.668)",quarter
+SaDOwk7,4,right_knee_angle,81.85,"(0.859,0.760)",quarter
+SaDOwk7,13,right_hip_angle,64.21,"(0.110,0.660)",return
+SaDOwk7,13,right_knee_angle,73.94,"(0.217,0.705)",return
+SaDOwk7,17,right_hip_angle,60.22,"(0.104,0.672)",end
+SaDOwk7,17,right_knee_angle,76.12,"(0.247,0.731)",end

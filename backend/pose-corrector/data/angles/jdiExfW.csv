@@ -1,0 +1,7 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+jdiExfW,0,right_shoulder_angle,61.89,"(0.233,0.763)",start
+jdiExfW,0,torso_angle,76.86176089936404,,start
+jdiExfW,6,right_shoulder_angle,158.7,"(0.274,0.611)",peak
+jdiExfW,6,torso_angle,61.37855581836726,,peak
+jdiExfW,11,right_shoulder_angle,34.25,"(0.246,0.772)",end
+jdiExfW,11,torso_angle,93.29676140006443,,end

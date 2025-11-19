@@ -1,0 +1,9 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+MSfvriJ,3,right_shoulder_angle,100.0,"(0.511,0.408)",quarter
+MSfvriJ,3,torso_angle,71.32581529297607,,quarter
+MSfvriJ,6,right_shoulder_angle,41.01,"(0.532,0.421)",peak
+MSfvriJ,6,torso_angle,69.08585146814374,,peak
+MSfvriJ,9,right_shoulder_angle,49.15,"(0.531,0.420)",return
+MSfvriJ,9,torso_angle,69.58731489242548,,return
+MSfvriJ,11,right_shoulder_angle,8.51,"(0.546,0.440)",end
+MSfvriJ,11,torso_angle,70.79839078825492,,end

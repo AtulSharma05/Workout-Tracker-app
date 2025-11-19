@@ -1,0 +1,5 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+zoOvPcx,0,left_shoulder_angle,31.14,"(0.451,0.587)",start
+zoOvPcx,0,left_elbow_angle,173.9,"(0.498,0.606)",start
+zoOvPcx,11,left_shoulder_angle,56.73,"(0.468,0.583)",end
+zoOvPcx,11,left_elbow_angle,150.69,"(0.458,0.624)",end

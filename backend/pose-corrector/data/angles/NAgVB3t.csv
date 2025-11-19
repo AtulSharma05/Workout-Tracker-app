@@ -1,0 +1,9 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+NAgVB3t,0,torso_angle,62.74568538247939,,start
+NAgVB3t,0,right_hip_angle,116.98,"(0.268,0.488)",start
+NAgVB3t,3,torso_angle,61.1869656320437,,quarter
+NAgVB3t,3,right_hip_angle,118.27,"(0.265,0.490)",quarter
+NAgVB3t,9,torso_angle,46.056070247367394,,return
+NAgVB3t,9,right_hip_angle,152.32,"(0.279,0.542)",return
+NAgVB3t,11,torso_angle,52.59765346036679,,end
+NAgVB3t,11,right_hip_angle,128.19,"(0.279,0.509)",end

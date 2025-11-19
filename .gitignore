@@ -123,6 +123,31 @@ frontend/app.*.map.json
 !backend/README.md
 !backend/WORKOUT_API_DOCS.md
 
+# Temporary documentation files (exclude)
+FLUTTER_POSE_INTEGRATION.md
+FLUTTER_QUICKSTART.md
+POSE_DETECTION_STATUS.md
+POSE_INTEGRATION_COMPLETE.md
+
+# ============================================
+# PYTHON VIRTUAL ENVIRONMENTS
+# ============================================
+venv/
+venv_py310/
+backend/ai-planner/venv/
+backend/pose-corrector/venv-py310/
+*.pyc
+__pycache__/
+.python-version
+
+# ============================================
+# SCRIPTS
+# ============================================
+START_ALL_SERVICES.ps1
+START_ALL_SERVICES_FIXED.ps1
+START_SERVICES.ps1
+start_pose_corrector.ps1
+
 # ============================================
 # OTHER
 # ============================================

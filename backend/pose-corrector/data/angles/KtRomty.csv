@@ -1,0 +1,9 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+KtRomty,0,torso_angle,111.03823826117953,,start
+KtRomty,0,right_hip_angle,62.2,"(0.069,0.340)",start
+KtRomty,3,torso_angle,110.39933353127444,,quarter
+KtRomty,3,right_hip_angle,62.29,"(0.067,0.338)",quarter
+KtRomty,9,torso_angle,91.02756224115717,,return
+KtRomty,9,right_hip_angle,162.04,"(0.489,0.576)",return
+KtRomty,11,torso_angle,94.09883319470087,,end
+KtRomty,11,right_hip_angle,177.16,"(0.521,0.559)",end

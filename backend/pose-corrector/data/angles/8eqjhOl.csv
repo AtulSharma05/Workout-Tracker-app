@@ -1,0 +1,11 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+8eqjhOl,0,left_shoulder_angle,27.8,"(0.657,0.426)",start
+8eqjhOl,0,left_elbow_angle,0.66,"(0.645,0.472)",start
+8eqjhOl,3,left_shoulder_angle,125.41,"(0.657,0.419)",quarter
+8eqjhOl,3,left_elbow_angle,160.87,"(0.646,0.370)",quarter
+8eqjhOl,6,left_shoulder_angle,119.75,"(0.658,0.420)",peak
+8eqjhOl,6,left_elbow_angle,158.67,"(0.635,0.355)",peak
+8eqjhOl,9,left_shoulder_angle,127.6,"(0.658,0.420)",return
+8eqjhOl,9,left_elbow_angle,173.31,"(0.647,0.361)",return
+8eqjhOl,11,left_shoulder_angle,31.28,"(0.668,0.428)",end
+8eqjhOl,11,left_elbow_angle,4.93,"(0.661,0.456)",end

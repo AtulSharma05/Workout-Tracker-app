@@ -1,0 +1,5 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+ziFKQXP,3,left_shoulder_angle,64.07,"(0.579,0.463)",quarter
+ziFKQXP,3,left_elbow_angle,145.68,"(0.686,0.485)",quarter
+ziFKQXP,9,left_shoulder_angle,59.95,"(0.554,0.466)",return
+ziFKQXP,9,left_elbow_angle,155.82,"(0.672,0.492)",return

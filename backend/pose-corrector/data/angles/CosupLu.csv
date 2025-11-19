@@ -1,0 +1,13 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+CosupLu,0,left_hip_angle,148.11,"(0.714,0.656)",start
+CosupLu,0,torso_angle,83.37381058648633,,start
+CosupLu,0,right_hip_angle,127.42,"(0.700,0.697)",start
+CosupLu,6,left_hip_angle,174.79,"(0.557,0.660)",peak
+CosupLu,6,torso_angle,76.72807938375098,,peak
+CosupLu,6,right_hip_angle,176.78,"(0.551,0.578)",peak
+CosupLu,9,left_hip_angle,175.97,"(0.532,0.675)",return
+CosupLu,9,torso_angle,76.78290374873833,,return
+CosupLu,9,right_hip_angle,172.4,"(0.523,0.600)",return
+CosupLu,11,left_hip_angle,174.6,"(0.503,0.678)",end
+CosupLu,11,torso_angle,86.0489974409882,,end
+CosupLu,11,right_hip_angle,176.46,"(0.498,0.638)",end

@@ -1,0 +1,7 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+nUwVh7b,0,left_hip_angle,87.87,"(0.552,0.688)",start
+nUwVh7b,0,right_hip_angle,151.39,"(0.479,0.703)",start
+nUwVh7b,6,left_hip_angle,175.73,"(0.542,0.480)",peak
+nUwVh7b,6,right_hip_angle,167.67,"(0.469,0.490)",peak
+nUwVh7b,9,left_hip_angle,137.6,"(0.547,0.463)",return
+nUwVh7b,9,right_hip_angle,178.39,"(0.469,0.483)",return

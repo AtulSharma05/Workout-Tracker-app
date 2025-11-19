@@ -1,0 +1,4 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+LmaFNZS,11,right_knee_angle,134.43,"(0.384,0.548)",end
+LmaFNZS,11,right_ankle_angle,124.72,"(0.390,0.782)",end
+LmaFNZS,11,right_elbow_angle,164.08,"(0.325,0.319)",end

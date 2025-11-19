@@ -1,0 +1,11 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+3pqGMQj,0,left_hip_angle,129.57,"(0.682,0.701)",start
+3pqGMQj,0,torso_angle,35.466081603793114,,start
+3pqGMQj,3,left_hip_angle,136.43,"(0.639,0.702)",quarter
+3pqGMQj,3,torso_angle,40.56485122638014,,quarter
+3pqGMQj,6,left_hip_angle,84.17,"(0.642,0.706)",peak
+3pqGMQj,6,torso_angle,40.35496441475892,,peak
+3pqGMQj,9,left_hip_angle,98.95,"(0.640,0.708)",return
+3pqGMQj,9,torso_angle,40.68321391776641,,return
+3pqGMQj,11,left_hip_angle,111.48,"(0.636,0.706)",end
+3pqGMQj,11,torso_angle,40.83137570310773,,end

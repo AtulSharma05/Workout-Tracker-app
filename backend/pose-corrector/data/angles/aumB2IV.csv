@@ -1,0 +1,5 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+aumB2IV,3,left_hip_angle,99.83,"(0.547,0.451)",quarter
+aumB2IV,3,torso_angle,89.77463338480288,,quarter
+aumB2IV,6,left_hip_angle,16.72,"(0.662,0.417)",peak
+aumB2IV,6,torso_angle,90.29144003080464,,peak

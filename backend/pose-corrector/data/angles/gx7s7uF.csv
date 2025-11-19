@@ -1,0 +1,17 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+gx7s7uF,3,left_shoulder_angle,15.26,"(0.569,0.472)",quarter
+gx7s7uF,3,right_shoulder_angle,80.3,"(0.487,0.397)",quarter
+gx7s7uF,3,left_elbow_angle,44.13,"(0.547,0.505)",quarter
+gx7s7uF,3,right_elbow_angle,68.87,"(0.435,0.372)",quarter
+gx7s7uF,6,left_shoulder_angle,19.49,"(0.561,0.473)",peak
+gx7s7uF,6,right_shoulder_angle,89.43,"(0.484,0.422)",peak
+gx7s7uF,6,left_elbow_angle,71.12,"(0.536,0.484)",peak
+gx7s7uF,6,right_elbow_angle,119.28,"(0.441,0.388)",peak
+gx7s7uF,9,left_shoulder_angle,15.93,"(0.562,0.474)",return
+gx7s7uF,9,right_shoulder_angle,69.6,"(0.486,0.417)",return
+gx7s7uF,9,left_elbow_angle,67.78,"(0.536,0.486)",return
+gx7s7uF,9,right_elbow_angle,87.01,"(0.435,0.399)",return
+gx7s7uF,11,left_shoulder_angle,2.41,"(0.571,0.476)",end
+gx7s7uF,11,right_shoulder_angle,81.84,"(0.487,0.413)",end
+gx7s7uF,11,left_elbow_angle,55.96,"(0.537,0.501)",end
+gx7s7uF,11,right_elbow_angle,151.41,"(0.423,0.375)",end

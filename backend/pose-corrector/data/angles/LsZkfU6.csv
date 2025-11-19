@@ -1,0 +1,5 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+LsZkfU6,3,left_elbow_angle,120.84,"(0.569,0.428)",quarter
+LsZkfU6,6,left_elbow_angle,160.41,"(0.509,0.433)",peak
+LsZkfU6,9,left_elbow_angle,139.01,"(0.528,0.438)",return
+LsZkfU6,11,left_elbow_angle,134.7,"(0.533,0.448)",end

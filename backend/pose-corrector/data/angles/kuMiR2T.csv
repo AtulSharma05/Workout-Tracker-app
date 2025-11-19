@@ -1,0 +1,7 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+kuMiR2T,0,right_knee_angle,156.63,"(0.472,0.692)",start
+kuMiR2T,0,right_hip_angle,56.79,"(0.377,0.488)",start
+kuMiR2T,3,right_knee_angle,143.94,"(0.469,0.690)",quarter
+kuMiR2T,3,right_hip_angle,54.24,"(0.364,0.489)",quarter
+kuMiR2T,11,right_knee_angle,154.91,"(0.467,0.689)",end
+kuMiR2T,11,right_hip_angle,56.68,"(0.372,0.507)",end

@@ -1,0 +1,5 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+ila4NZS,3,left_hip_angle,143.77,"(0.598,0.455)",quarter
+ila4NZS,6,left_hip_angle,170.16,"(0.581,0.466)",peak
+ila4NZS,9,left_hip_angle,162.16,"(0.570,0.473)",return
+ila4NZS,11,left_hip_angle,127.26,"(0.583,0.474)",end

@@ -14,6 +14,7 @@ import 'pages/home_page.dart';
 import 'pages/log_workout_page.dart';
 import 'pages/workout_history_page.dart';
 import 'pages/create_workout_plan_page.dart';
+import 'pages/pose_analysis_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,7 +53,8 @@ class MyApp extends StatelessWidget {
           if (settings.name == '/home' || 
               settings.name == '/log-workout' || 
               settings.name == '/workout-history' ||
-              settings.name == '/create-workout-plan') {
+              settings.name == '/create-workout-plan' ||
+              settings.name == '/pose-analysis') {
             return MaterialPageRoute(
               builder: (context) => FutureBuilder(
                 future: _setAuthToken(context),
@@ -70,6 +72,9 @@ class MyApp extends StatelessWidget {
                         return const WorkoutHistoryPage();
                       case '/create-workout-plan':
                         return const CreateWorkoutPlanPage();
+                      case '/pose-analysis':
+                        final args = settings.arguments as Map<String, dynamic>?;
+                        return PoseAnalysisPage(exerciseName: args?['exerciseName']);
                       default:
                         return const WelcomePage();
                     }

@@ -1,0 +1,17 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+fNGumX0,0,left_hip_angle,137.16,"(0.689,0.581)",start
+fNGumX0,0,left_knee_angle,177.22,"(0.732,0.655)",start
+fNGumX0,0,right_hip_angle,179.52,"(0.603,0.598)",start
+fNGumX0,0,right_knee_angle,178.99,"(0.611,0.657)",start
+fNGumX0,6,left_hip_angle,171.84,"(0.630,0.457)",quarter
+fNGumX0,6,left_knee_angle,176.93,"(0.643,0.597)",quarter
+fNGumX0,6,right_hip_angle,176.9,"(0.540,0.470)",quarter
+fNGumX0,6,right_knee_angle,175.85,"(0.587,0.648)",quarter
+fNGumX0,18,left_hip_angle,176.11,"(0.472,0.437)",return
+fNGumX0,18,left_knee_angle,176.93,"(0.426,0.614)",return
+fNGumX0,18,right_hip_angle,173.29,"(0.377,0.415)",return
+fNGumX0,18,right_knee_angle,175.37,"(0.375,0.571)",return
+fNGumX0,23,left_hip_angle,172.84,"(0.467,0.436)",end
+fNGumX0,23,left_knee_angle,176.1,"(0.437,0.597)",end
+fNGumX0,23,right_hip_angle,173.82,"(0.377,0.417)",end
+fNGumX0,23,right_knee_angle,175.44,"(0.377,0.575)",end

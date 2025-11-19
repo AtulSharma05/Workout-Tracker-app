@@ -1,0 +1,5 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+Ion0XWz,9,right_shoulder_angle,8.37,"(0.536,0.750)",return
+Ion0XWz,9,right_elbow_angle,89.44,"(0.718,0.706)",return
+Ion0XWz,11,right_shoulder_angle,3.6,"(0.524,0.725)",end
+Ion0XWz,11,right_elbow_angle,93.78,"(0.703,0.705)",end

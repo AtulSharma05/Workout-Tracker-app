@@ -1,0 +1,6 @@
+exerciseId,frameNumber,angleName,angleValue,landmarkCoordinates,phase
+Iptlv6x,0,right_shoulder_angle,1.16,"(0.532,0.222)",start
+Iptlv6x,3,right_shoulder_angle,120.37,"(0.534,0.216)",quarter
+Iptlv6x,6,right_shoulder_angle,118.98,"(0.524,0.215)",peak
+Iptlv6x,9,right_shoulder_angle,118.47,"(0.530,0.214)",return
+Iptlv6x,11,right_shoulder_angle,41.82,"(0.531,0.213)",end
