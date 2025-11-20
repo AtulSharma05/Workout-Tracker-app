@@ -331,8 +331,7 @@ class ProfessionalPoseCorrector:
         if 'curl' in exercise_name:
             # Bicep/arm curls - focus on elbow angles
             primary_angle = min(angles.get('left_elbow', 90), angles.get('right_elbow', 90))
-            # More forgiving thresholds for better detection
-            angle_thresholds = {'extended': 150, 'quarter': 120, 'peak': 70, 'return': 110}
+            angle_thresholds = {'extended': 160, 'quarter': 120, 'peak': 60, 'return': 100}
             
         elif 'squat' in exercise_name or 'lunge' in exercise_name:
             # Squats/lunges - focus on knee angles  
@@ -427,35 +426,27 @@ class ProfessionalPoseCorrector:
         if new_phase != self.current_phase and len(self.angle_buffer) % 5 == 0:
             print(f"🔄 [{exercise_name}] Phase: {self.current_phase} → {new_phase} (Angle: {primary_angle:.1f}°)")
         
-        # Phase validation with consensus (need 3 consistent readings)
+        # Phase validation with consensus
         self.phase_buffer.append(new_phase)
         if len(self.phase_buffer) >= 3:
             most_common = max(set(self.phase_buffer), key=list(self.phase_buffer).count)
             if most_common != self.current_phase:
-                old_phase = self.current_phase
                 self.current_phase = most_common
                 self.phase_history.append(most_common)
-                print(f"🔄 Phase: {old_phase.upper()} → {self.current_phase.upper()} (Angle: {primary_angle:.1f}°)")
+                print(f"🔄 Phase: {self.current_phase.upper()} (Angle: {primary_angle:.1f}°)")
         
-        # Improved rep detection with full cycle validation
-        # Check if we've completed a full cycle: start → peak → start
-        cycle_complete = (
-            len(self.phase_history) >= 3 and
-            'peak' in self.phase_history[-5:] and  # Must have reached peak recently
-            self.current_phase == "start"  # And returned to start
-        )
-        
+        # Universal rep detection
         is_good_rep = (
-            cycle_complete and 
-            timestamp - self.last_rep_time > 0.8 and  # Slightly faster minimum (0.8s instead of 1.0s)
-            angle_range > 35  # Slightly lower threshold (35° instead of 40°)
+            self.current_phase == "start" and 
+            timestamp - self.last_rep_time > 1.0 and 
+            angle_range > 40  # Reduced threshold for more exercises
         )
         
         if is_good_rep:
             self.rep_count += 1
             self.last_rep_time = timestamp
             self.rep_flash_timer = timestamp
-            print(f"✅ REP {self.rep_count} COMPLETED! [{exercise_name}] (Range: {angle_range:.1f}°, Time: {timestamp - self.last_rep_time:.1f}s)")
+            print(f"🎯 REP {self.rep_count} COMPLETED! [{exercise_name}] (Range: {angle_range:.1f}°)")
             
             # Clear history for next rep
             self.phase_history.clear()

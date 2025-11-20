@@ -114,22 +114,6 @@ frontend/app.*.map.json
 !frontend/android/gradle-wrapper.jar
 
 # ============================================
-# DOCUMENTATION (Keep these)
-# ============================================
-!README.md
-!QUICK_START.md
-!PROJECT_SUMMARY.md
-!ARCHITECTURE.md
-!backend/README.md
-!backend/WORKOUT_API_DOCS.md
-
-# Temporary documentation files (exclude)
-FLUTTER_POSE_INTEGRATION.md
-FLUTTER_QUICKSTART.md
-POSE_DETECTION_STATUS.md
-POSE_INTEGRATION_COMPLETE.md
-
-# ============================================
 # PYTHON VIRTUAL ENVIRONMENTS
 # ============================================
 venv/
@@ -140,13 +124,9 @@ backend/pose-corrector/venv-py310/
 __pycache__/
 .python-version
 
-# ============================================
-# SCRIPTS
-# ============================================
-START_ALL_SERVICES.ps1
-START_ALL_SERVICES_FIXED.ps1
-START_SERVICES.ps1
-start_pose_corrector.ps1
+# Python cache and debug files
+backend/pose-corrector/debug_frame.jpg
+backend/pose-corrector/*.log
 
 # ============================================
 # OTHER
