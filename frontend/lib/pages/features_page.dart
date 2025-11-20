@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import 'rewards_page.dart';
 import 'home_page.dart';
+import 'exercise_selection_page.dart';
 
 /// Features Page
 /// Grid of feature cards for main app functionality
@@ -255,47 +256,10 @@ class FeaturesPage extends StatelessWidget {
   }
 
   void _showExerciseSelectionDialog(BuildContext context) {
-    final exercises = [
-      'Push-up',
-      'Squat',
-      'Plank',
-      'Bicep Curl',
-      'Shoulder Press',
-      'Lunge',
-      'Jumping Jack',
-    ];
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Select Exercise'),
-        content: SizedBox(
-          width: double.maxFinite,
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: exercises.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                leading: const Icon(Icons.fitness_center),
-                title: Text(exercises[index]),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(
-                    context,
-                    '/pose-analysis',
-                    arguments: {'exerciseName': exercises[index].toLowerCase()},
-                  );
-                },
-              );
-            },
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-        ],
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const ExerciseSelectionPage(),
       ),
     );
   }
