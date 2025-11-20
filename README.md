@@ -1,5 +1,9 @@
 # 🏋️ Workout Tracker App
-#C:\Users\hp\AppData\Local\Programs\Python\Python313\python.exe api_server.py                      
+C:\Users\hp\AppData\Local\Programs\Python\Python313\python.exe api_server.py                      
+ <!-- & C:/Users/hp/Desktop/new/.venv/Scripts/Activate.ps1
+ .\venv_py310\Scripts\activate
+python professional_pose_corrector.py -->
+.\start_pose_corrector.ps1
 A full-stack workout tracking application with Flutter frontend and Node.js/Express/MongoDB backend. Track your fitness journey with AI-powered workout plans, real-time analytics, achievements, and rewards system.
 
 ## ✨ Features
