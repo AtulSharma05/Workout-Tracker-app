@@ -26,6 +26,7 @@ const workoutLoggingRoutes = require('./routes/workoutLogging'); // Frontend-com
 const workoutPlanRoutes = require('./routes/workoutPlanRoutes'); // AI Workout Planner routes
 const exerciseRoutes = require('./routes/exerciseRoutes'); // Exercise database routes
 const poseAnalysisRoutes = require('./routes/poseAnalysisRoutes'); // Pose Analysis routes
+const solanaRoutes = require('./routes/solanaRoutes'); // Solana blockchain token transfers
 // const userRoutes = require('./routes/users');
 // const blogRoutes = require('./routes/blogs');
 
@@ -92,6 +93,7 @@ apiRouter.get('/', (req, res) => {
       'workout_plans (AI)': `/api/${API_VERSION}/workout-plans`, // AI Workout Planner
       exercises: `/api/${API_VERSION}/exercises`, // Exercise database
       'pose_analysis': `/api/${API_VERSION}/pose`, // Pose Analysis & Rep Counting
+      solana: `/api/${API_VERSION}/solana`, // Blockchain token transfers
       users: `/api/${API_VERSION}/users`,
       blogs: `/api/${API_VERSION}/blogs`
     },
@@ -107,6 +109,7 @@ apiRouter.use('/workout_logging', workoutLoggingRoutes); // Frontend-compatible 
 apiRouter.use('/workout-plans', workoutPlanRoutes); // AI Workout Planner routes
 apiRouter.use('/exercises', exerciseRoutes); // Exercise database routes
 apiRouter.use('/pose', poseAnalysisRoutes); // Pose Analysis routes
+apiRouter.use('/solana', solanaRoutes); // Solana blockchain routes
 // apiRouter.use('/users', userRoutes);
 // apiRouter.use('/blogs', blogRoutes);
 

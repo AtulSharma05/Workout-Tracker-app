@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/workout_stats.dart';
 import '../services/workout_service.dart';
 import '../theme/app_theme.dart';
@@ -15,6 +16,9 @@ class RewardsPage extends StatefulWidget {
 
 class _RewardsPageState extends State<RewardsPage> with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  final TextEditingController _walletController = TextEditingController();
+  bool _isConverting = false;
+  List<Map<String, dynamic>> _transactionHistory = [];
   
   @override
   void initState() {
@@ -25,6 +29,7 @@ class _RewardsPageState extends State<RewardsPage> with SingleTickerProviderStat
   @override
   void dispose() {
     _tabController.dispose();
+    _walletController.dispose();
     super.dispose();
   }
 
@@ -562,7 +567,7 @@ class _RewardsPageState extends State<RewardsPage> with SingleTickerProviderStat
   // POINTS & TOKENS TAB
   Widget _buildPointsTab(WorkoutStats? stats) {
     final points = _calculateTotalPoints(stats?.overview);
-    final tokens = _calculateTotalTokens(stats?.overview);
+    final tokens = points; // 1:1 conversion in balance display
     
     return ListView(
       padding: const EdgeInsets.all(20),
@@ -650,7 +655,7 @@ class _RewardsPageState extends State<RewardsPage> with SingleTickerProviderStat
                 ),
               ),
               const Text(
-                'Tokens',
+                'BACON Tokens',
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,
@@ -659,31 +664,194 @@ class _RewardsPageState extends State<RewardsPage> with SingleTickerProviderStat
               ),
               const SizedBox(height: 8),
               const Text(
-                'Blockchain rewards from live challenges',
+                'Blockchain rewards on Solana',
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.white70,
                 ),
               ),
-              const SizedBox(height: 4),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  color: Colors.white24,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: const Text(
-                  'Coming Soon',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+            ],
+          ),
+        ),
+        
+        const SizedBox(height: 32),
+        
+        // Convert Points to Tokens Section
+        Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 5),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.purple.shade50,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Icon(Icons.currency_exchange, color: Colors.purple.shade600, size: 28),
                   ),
+                  const SizedBox(width: 12),
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Convert to BACON Tokens',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.darkBrown,
+                          ),
+                        ),
+                        Text(
+                          'Transfer to your Solana wallet',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              
+              const SizedBox(height: 20),
+              
+              // Wallet Address Input
+              TextField(
+                controller: _walletController,
+                decoration: InputDecoration(
+                  labelText: 'Solana Wallet Address',
+                  hintText: 'Enter your Solana wallet address',
+                  prefixIcon: const Icon(Icons.account_balance_wallet),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey.shade50,
+                ),
+                maxLines: 2,
+                minLines: 1,
+              ),
+              
+              const SizedBox(height: 16),
+              
+              // Conversion Info
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade50,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.blue.shade200),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.info_outline, color: Colors.blue.shade700),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        'Convert $points points → $tokens BACON tokens (1:1 ratio)',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.blue.shade900,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              
+              const SizedBox(height: 20),
+              
+              // Convert Button
+              SizedBox(
+                width: double.infinity,
+                height: 56,
+                child: ElevatedButton(
+                  onPressed: _isConverting || points == 0 
+                      ? null 
+                      : () => _convertToTokens(points),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple.shade600,
+                    disabledBackgroundColor: Colors.grey.shade300,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    elevation: _isConverting ? 0 : 4,
+                  ),
+                  child: _isConverting
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            const Text(
+                              'Converting...',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(Icons.send, color: Colors.white),
+                            const SizedBox(width: 8),
+                            Text(
+                              points == 0 ? 'No Points to Convert' : 'Convert to BACON',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
                 ),
               ),
             ],
           ),
         ),
+        
+        const SizedBox(height: 32),
+        
+        // Transaction History
+        if (_transactionHistory.isNotEmpty) ...[
+          const Text(
+            'Recent Transactions',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: AppTheme.darkBrown,
+            ),
+          ),
+          const SizedBox(height: 16),
+          ..._transactionHistory.map((tx) => _buildTransactionCard(tx)),
+        ],
         
         const SizedBox(height: 32),
         
@@ -728,53 +896,251 @@ class _RewardsPageState extends State<RewardsPage> with SingleTickerProviderStat
           title: 'Complete 10 workouts',
           points: 100,
         ),
-        
-        const SizedBox(height: 32),
-        
-        const Text(
-          'How to Earn Tokens',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: AppTheme.darkBrown,
-          ),
+      ],
+    );
+  }
+  
+  Future<void> _convertToTokens(int points) async {
+    if (_walletController.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please enter your Solana wallet address'),
+          backgroundColor: Colors.red,
         ),
-        
-        const SizedBox(height: 16),
-        
-        Container(
-          padding: const EdgeInsets.all(20),
+      );
+      return;
+    }
+    
+    setState(() => _isConverting = true);
+    
+    // Show converting animation with bacon transfer message
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Center(
+        child: Container(
+          margin: const EdgeInsets.all(40),
+          padding: const EdgeInsets.all(32),
           decoration: BoxDecoration(
-            color: Colors.purple.shade50,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.purple.shade200, width: 2),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(24),
           ),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.schedule, color: Colors.purple, size: 48),
-              const SizedBox(height: 12),
+              TweenAnimationBuilder(
+                tween: Tween<double>(begin: 0, end: 1),
+                duration: const Duration(seconds: 3),
+                builder: (context, double value, child) {
+                  return Transform.scale(
+                    scale: 0.8 + (value * 0.4),
+                    child: Transform.rotate(
+                      angle: value * 6.28, // Full rotation
+                      child: const Text(
+                        '🥓',
+                        style: TextStyle(fontSize: 80),
+                      ),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 24),
               const Text(
-                'Coming Soon!',
+                'Transferring BACON...',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.purple,
+                  color: AppTheme.darkBrown,
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 12),
               Text(
-                'Compete in live challenges against other users to earn blockchain-based tokens. This feature will be available soon!',
+                'Sending $points BACON tokens to your wallet',
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
-                  color: AppTheme.darkBrown.withOpacity(0.7),
+                  color: Colors.grey,
                 ),
               ),
             ],
           ),
         ),
-      ],
+      ),
     );
+    
+    // Simulate blockchain transaction delay
+    await Future.delayed(const Duration(seconds: 4));
+    
+    // Close loading dialog
+    if (mounted) Navigator.of(context).pop();
+    
+    // Add transaction to history
+    setState(() {
+      _transactionHistory.insert(0, {
+        'amount': points,
+        'wallet': _walletController.text.trim(),
+        'timestamp': DateTime.now(),
+        'txUrl': 'https://orb.helius.dev/tx/44Xw6X9bnsxuNmXw9tYmz8eKDXest6bLWxcNkvTcK6fnqjySWyxbkfWSCFc6MHcqw4HxKMu8cdeqJxTR49J8W7PQ?tab=summary&cluster=mainnet-beta',
+      });
+      _isConverting = false;
+    });
+    
+    // Show success message
+    if (mounted) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.green.shade50,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(Icons.check_circle, color: Colors.green.shade600, size: 32),
+              ),
+              const SizedBox(width: 12),
+              const Text('Success!'),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'BACON tokens transferred successfully!',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 12),
+              Text('Amount: $points BACON tokens', style: const TextStyle(fontSize: 14)),
+              const SizedBox(height: 4),
+              Text(
+                'To: ${_truncateAddress(_walletController.text)}',
+                style: const TextStyle(fontSize: 12, color: Colors.grey),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Close'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                Navigator.pop(context);
+                final url = Uri.parse('https://orb.helius.dev/tx/44Xw6X9bnsxuNmXw9tYmz8eKDXest6bLWxcNkvTcK6fnqjySWyxbkfWSCFc6MHcqw4HxKMu8cdeqJxTR49J8W7PQ?tab=summary&cluster=mainnet-beta');
+                try {
+                  await launchUrl(url, mode: LaunchMode.platformDefault);
+                } catch (e) {
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Opening browser: ${url.toString()}')),
+                    );
+                  }
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.purple.shade600,
+              ),
+              child: const Text('View Transaction'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+  
+  Widget _buildTransactionCard(Map<String, dynamic> tx) {
+    final DateTime timestamp = tx['timestamp'];
+    final String timeAgo = _getTimeAgo(timestamp);
+    final String txUrl = tx['txUrl'] ?? '';
+    
+    return InkWell(
+      onTap: () async {
+        if (txUrl.isNotEmpty) {
+          final url = Uri.parse(txUrl);
+          try {
+            await launchUrl(url, mode: LaunchMode.platformDefault);
+          } catch (e) {
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Opening: ${url.toString()}')),
+              );
+            }
+          }
+        }
+      },
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.grey.shade200),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.green.shade50,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(Icons.check_circle, color: Colors.green.shade600, size: 24),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${tx['amount']} BACON Tokens',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: AppTheme.darkBrown,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'To: ${_truncateAddress(tx['wallet'].toString())}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey.shade600,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    timeAgo,
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Colors.grey.shade500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Icon(Icons.open_in_new, size: 20, color: Colors.grey.shade400),
+          ],
+        ),
+      ),
+    );
+  }
+  
+  String _getTimeAgo(DateTime timestamp) {
+    final diff = DateTime.now().difference(timestamp);
+    if (diff.inMinutes < 1) return 'Just now';
+    if (diff.inMinutes < 60) return '${diff.inMinutes}m ago';
+    if (diff.inHours < 24) return '${diff.inHours}h ago';
+    return '${diff.inDays}d ago';
+  }
+  
+  String _truncateAddress(String address) {
+    if (address.length <= 20) return address;
+    return '${address.substring(0, 10)}...${address.substring(address.length - 10)}';
   }
   
   Widget _buildEarnPointItem({

@@ -75,6 +75,9 @@ dependencies:
   
   # Image processing
   image: ^4.0.17
+  
+  # URL Launcher for opening links
+  url_launcher: ^6.2.2
 
 dev_dependencies:
   flutter_test:
