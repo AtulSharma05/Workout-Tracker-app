@@ -143,9 +143,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   const SizedBox(height: 8),
                   
                   // Member since
-                  if (user != null)
+                  if (user != null && user.createdAt != null)
                     Text(
-                      'Member since ${DateFormat('MMM yyyy').format(user.createdAt)}',
+                      'Member since ${DateFormat('MMM yyyy').format(user.createdAt!)}',
                       style: TextStyle(
                         fontSize: 14,
                         color: AppTheme.darkBrown.withOpacity(0.5),

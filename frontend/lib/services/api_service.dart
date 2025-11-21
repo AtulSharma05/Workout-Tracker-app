@@ -26,6 +26,11 @@ class ApiService {
       },
     ));
     
+    // Log the base URL being used
+    debugPrint('🌐 API Service initialized with baseUrl: ${ApiConfig.baseUrl}');
+    debugPrint('⏱️  Connection timeout: ${ApiConfig.connectionTimeout.inSeconds}s');
+    debugPrint('⏱️  Receive timeout: ${ApiConfig.receiveTimeout.inSeconds}s');
+    
     // Add interceptors for logging and error handling
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {

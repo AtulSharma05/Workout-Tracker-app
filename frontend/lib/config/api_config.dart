@@ -9,7 +9,7 @@ import 'dart:io';
 class ApiConfig {
   // CHANGE THIS to your computer's local IP address when testing on physical devices
   // Find your IP: Windows (ipconfig), Mac/Linux (ifconfig)
-  static const String _networkIP = '192.168.1.10'; // Your computer's IP
+  static const String _networkIP = '192.168.1.8'; // Your computer's IP
   
   static const String _port = '3000';
   static const String _apiVersion = 'v1';
@@ -20,7 +20,7 @@ class ApiConfig {
     // For emulators/simulators, use platform-specific localhost mapping
     
     // Note: Change _useEmulator to false when testing on physical device
-    const bool _useEmulator = false; // SET TO false FOR PHYSICAL DEVICE
+    const bool _useEmulator = true; // SET TO true FOR EMULATOR, false FOR PHYSICAL DEVICE
     
     if (Platform.isAndroid && _useEmulator) {
       // Android emulator uses 10.0.2.2 to access host's localhost
@@ -65,7 +65,7 @@ class ApiConfig {
   /// Get pose analysis WebSocket URL
   static String get poseWebSocketUrl {
     // Note: Change _useEmulator to false when testing on physical device
-    const bool _useEmulator = false; // SET TO false FOR PHYSICAL DEVICE
+    const bool _useEmulator = true; // SET TO true FOR EMULATOR, false FOR PHYSICAL DEVICE
     
     String wsBaseUrl;
     if (Platform.isAndroid && _useEmulator) {
@@ -79,8 +79,8 @@ class ApiConfig {
   }
   
   /// Timeout durations
-  static const Duration connectionTimeout = Duration(seconds: 30);
-  static const Duration receiveTimeout = Duration(seconds: 30);
+  static const Duration connectionTimeout = Duration(seconds: 60);
+  static const Duration receiveTimeout = Duration(seconds: 60);
   
   /// Enable/disable logging
   static const bool enableLogging = true;

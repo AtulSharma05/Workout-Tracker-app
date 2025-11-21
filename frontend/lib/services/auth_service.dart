@@ -158,8 +158,13 @@ class AuthService {
   
   /// Save user data
   Future<void> _saveUser(Map<String, dynamic> userData) async {
-    await _secureStorage.write(key: 'user_id', value: userData['_id'] ?? userData['id']);
-    await _secureStorage.write(key: 'user_email', value: userData['email']);
+    if (userData['_id'] != null || userData['id'] != null) {
+      await _secureStorage.write(key: 'user_id', value: userData['_id'] ?? userData['id']);
+    }
+    final email = userData['email'] ?? userData['email_id'];
+    if (email != null) {
+      await _secureStorage.write(key: 'user_email', value: email);
+    }
     if (userData['username'] != null) {
       await _secureStorage.write(key: 'user_username', value: userData['username']);
     }
@@ -171,8 +176,6 @@ class AuthService {
   /// Get current user data
   Future<User?> getCurrentUser() async {
     final id = await _secureStorage.read(key: 'user_id');
-    if (id == null) return null;
-    
     final email = await _secureStorage.read(key: 'user_email');
     final username = await _secureStorage.read(key: 'user_username');
     final fullName = await _secureStorage.read(key: 'user_fullName');
@@ -180,7 +183,7 @@ class AuthService {
     if (email == null) return null;
     
     return User(
-      id: id,
+      id: id ?? '',
       email: email,
       username: username,
       fullName: fullName,
